@@ -12,22 +12,30 @@ body{
     font-size: 30px;
     padding-top: 20px;
 }
-.merch img
+.merch 
 {
     width: 200px;
-    border: solid rgb(131, 131, 131) 1px;
-    margin-left: 100px;
+    border: solid rgb(71, 71, 71) 1px;
+    margin-left: 150px;
     margin-top: 40px;
     
 }
 img
 {
+    margin-left: -40px;
     
-    transform: scale(1);
-    transition: 0.5s ease-in-out;
-
+    
 }
-img:hover 
-{
-    transform: scale(1.2);
+.merch .zoom-in figure img {
+	transform: scale(1);
+	transition: 0.5s ease-in-out;
 }
+.merch .zoom-in figure:hover img {
+	transform: scale(1.1);
+}
+.merch img {
+	display: block;
+	width: 200px;
+	
+	
+   
