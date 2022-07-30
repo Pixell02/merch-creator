@@ -20,3 +20,14 @@ body{
     margin-top: 40px;
     
 }
+img
+{
+    
+    transform: scale(1);
+    transition: 0.5s ease-in-out;
+
+}
+img:hover 
+{
+    transform: scale(1.2);
+}
