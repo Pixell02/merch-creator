@@ -20,13 +20,17 @@
             </section>   
         </section> 
     </section>
-    <script src="app.js"></script>
+    
     <button id="t-shirt">Create</button>
     <div id="modal">
     <div id="modal-creator" >
-    <div id="modal-bar"><button id="front-side" class="Button">Front</button><button id="back-side" class="Button">Back</button></div>
-    <div id="t-shirt"></div><input type="file" class="Button">    
+    <div id="modal-bar"><button id="front-side" class="Button">Front side</button><button id="back-side" class="Button">Back side</button><span class="closeBtn">&times;</span></div>
+    <div id="image-t-shirt"><img src="front-t-shirt.png" alt="t-shirt" ></div><input type="file" class="Button" > <button id="file">Upload</button><div id="color">color picker</div>
+    <input type="text" id="hexa-color" placeholder="example #000000">
+    <div id="files-holder">loaded files</div>
     </div> 
+    
     </div>
+    <script src="app.js"></script>
 </body>
 </html>

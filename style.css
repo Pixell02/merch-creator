@@ -38,30 +38,103 @@ img
 	display: block;
 	width: 200px;
 }
-button, .Button
+#t-shirt, #modal button
 {
-    width: 205px;
-    height: 50px;
-    margin-left: 148px;
     background-color: #133879;
     color: white;
     font-size: 110%;
+    border: none;
+    width: 205px;
+    height: 50px;
     transition: 1s;
+    border-right: #1b305a solid;
 }
-
-
-button:hover
+#t-shirt
 {
-    background-color: #071225;
+    
+    margin-left: 148px;
+    
 }
 
-#modal-creator
+
+#t-shirt:hover, #modal button:hover
 {
-    display: none;
-    background-color: rgb(212, 212, 212);
+    background-color: #0a1e42;
 }
+
+
 #modal
 {
+    
     position: fixed;
+    z-index: 1;
     background-color: rgba(0, 0, 0, 0.5);
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+#modal-creator
+{
+    background-color: white;
+    margin: 10%;
+    padding: 20px;
+    width: 80%;
+}
+.closeBtn
+{
+    float: right;
+    font-size: 30px;
+    top: 0;
+}
+input[type=file]
+{
+    display: none;
+}
+#image-t-shirt
+{
+    display: inline;
+
+}
+#file
+{
+    position: absolute;
+    margin-top: 12px;
+    margin-left: 50px;
+}
+#image-t-shirt img
+{
+    margin-top: 10px;
+    border: rgba(0, 0, 0, 0.5) solid 1px;
+    width: 408px;  
+    margin-left: 0px;
+}
+#color
+{
+    width: 205px;
+    height: 250px;
+    border: #040913 solid 1px;
+    position: absolute;
+    display: inline;
+    margin-left: 50px;
+    margin-top: 100px;
+}
+#hexa-color
+{
+    margin-left: 50px;
+    width: 200px;
+    font-size: 20px;
+    position: absolute;
+    margin-top: 390px;
+}
+#files-holder
+{
+    border: #040913 solid 1px;
+    
+    float: right;
+    width: 350px;
+    height: 408px;
+    margin-top: 10px;
+    margin-right: 10px;
 }

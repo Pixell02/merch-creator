@@ -5,3 +5,4 @@ function create_window(e){
     modal_window.style.display = "fixed";
     e.preventdefault();
 }
+let file = document.getElementById('file').click;
