@@ -1,6 +1,7 @@
 body{
     margin: 0;
     background-color: #040913;
+    font-family: Montserrat medium;
 }
 #header-top
 {
@@ -37,5 +38,30 @@ img
 	display: block;
 	width: 200px;
 }
-	
-   
+button, .Button
+{
+    width: 205px;
+    height: 50px;
+    margin-left: 148px;
+    background-color: #133879;
+    color: white;
+    font-size: 110%;
+    transition: 1s;
+}
+
+
+button:hover
+{
+    background-color: #071225;
+}
+
+#modal-creator
+{
+    display: none;
+    background-color: rgb(212, 212, 212);
+}
+#modal
+{
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+}

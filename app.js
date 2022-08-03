@@ -1,10 +1,7 @@
-const merch = document.getElementsByClassName('image').addEventlistener('click',modal());
+let create = document.getElementById('t-shirt').addEventListener('onclick',create_window());
 
-function modal(e){
-    let popup =document.querySelector('div');
-    popup = document.createElement('div');
-    popup.id = "pop-up";
-    popup.style.backgroundColor="white";
-    popup.style.width = "200";
+function create_window(e){
+    let modal_window = document.getElementById("modal-creator");
+    modal_window.style.display = "fixed";
     e.preventdefault();
 }
