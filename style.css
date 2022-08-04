@@ -40,7 +40,7 @@ img
 }
 #t-shirt, #modal button
 {
-    background-color: #133879;
+    
     color: white;
     font-size: 110%;
     border: none;
@@ -48,6 +48,14 @@ img
     height: 50px;
     transition: 1s;
     border-right: #1b305a solid;
+}
+#back-side, #file, #t-shirt
+{
+    background-color: #133879;
+}
+#front-side
+{
+    background-color: #0a1e42;
 }
 #t-shirt
 {
@@ -65,9 +73,8 @@ img
 
 #modal
 {
-    
+    display: none;
     position: fixed;
-    z-index: 1;
     background-color: rgba(0, 0, 0, 0.5);
     left: 0;
     top: 0;
@@ -82,11 +89,12 @@ img
     padding: 20px;
     width: 80%;
 }
-.closeBtn
+#closeBtn
 {
     float: right;
     font-size: 30px;
     top: 0;
+    color: #155adb;
 }
 input[type=file]
 {
@@ -130,11 +138,22 @@ input[type=file]
 }
 #files-holder
 {
-    border: #040913 solid 1px;
-    
+    border: #040913 solid 1px; 
     float: right;
     width: 350px;
     height: 408px;
     margin-top: 10px;
     margin-right: 10px;
+}
+#closeBtn:hover, #closeBtn:focus
+{
+    color:#000000 ;
+}
+#back
+{
+    display: none;
+}
+#front
+{
+background-image: red;
 }
