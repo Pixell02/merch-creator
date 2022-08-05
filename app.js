@@ -88,6 +88,7 @@ function changeToFrontSide(e)
 let upload = document.getElementById('file');
 let realBtn = document.getElementById('file-upload');
 let place = document.getElementById('chosen-image');
+let holder = document.getElementById('files-holder');
 upload.addEventListener('click',uploadFile);
 
 function uploadFile(e)
@@ -105,5 +106,6 @@ function uploadFile(e)
     reader.onload = () =>
     {
         place.setAttribute("src",reader.result);
+
     }
 }

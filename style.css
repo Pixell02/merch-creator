@@ -217,6 +217,7 @@ input[type=file]
     margin-top: 110px;
     margin-left: 135px;
     justify-content: center;
+    overflow: hidden;
      
 }
 #chosen-image
@@ -225,6 +226,7 @@ input[type=file]
     height: auto;
     margin-left: 0;
     z-index: 3;
+    
     
     
     
