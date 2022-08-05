@@ -120,7 +120,7 @@ input[type=file]
     margin-top: 12px;
     margin-left: 50px;
 }
-#image-t-shirt img
+#image-t-shirt .background
 {
     margin-top: 10px;
     border: rgba(0, 0, 0, 0.5) solid 1px;
@@ -169,11 +169,13 @@ input[type=file]
 {
     
     position: absolute;
+    z-index: 1;
 }
 #front-background
 {
     position: absolute;
     width: 100%;
+    z-index: 2;
     
 }
 #back-background
@@ -205,3 +207,26 @@ input[type=file]
     height: 250px;
 }
 
+#logo
+{
+    
+    max-width: 135px;
+    display: flex;
+    position: absolute;
+    max-height: 250px;
+    margin-top: 110px;
+    margin-left: 135px;
+    justify-content: center;
+     
+}
+#chosen-image
+{
+    width: 135px !important;
+    height: auto;
+    margin-left: 0;
+    z-index: 3;
+    
+    
+    
+    
+}
