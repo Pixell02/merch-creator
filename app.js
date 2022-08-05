@@ -11,7 +11,7 @@ openBtn.addEventListener('click', openModal);
 
 function openModal(e)
 {
-    modal.style.display = "block";
+    modal.style.display = "flex";
     e.preventDefault();
 }
 // Closing modal window
@@ -22,6 +22,30 @@ function closeModal(e)
     modal.style.display = "none";
     e.preventDefault();
 }
+// Get color
+
+// const hexColor = document.getElementById('hexacolor');
+const pickerColor = document.getElementById('pallet');
+const backColor = document.getElementById('back-background');
+const frontColor = document.getElementById('front-background');
+pickerColor.addEventListener('input',colorValue);
+function colorValue(e)
+{
+    backColor.style.backgroundColor = pickerColor.value;
+    frontColor.style.backgroundColor = pickerColor.value;
+    e.preventDefault();
+}
+const inputColor = document.getElementById('hexa-color');
+
+inputColor.addEventListener('input',inputValue);
+
+function inputValue(e)
+{
+    backColor.style.backgroundColor = "#"+inputColor.value;
+    frontColor.style.backgroundColor = "#"+inputColor.value;
+    e.preventDefault();
+}
+
 
 // Get back Btn
 
@@ -40,7 +64,7 @@ function changeToBackSide(e)
     document.getElementById('front-background').style.display = 'none';
     document.getElementById('back-side').style.backgroundColor = '#0a1e42';
     document.getElementById('front-side').style.backgroundColor = '#133879';
-    document.querySelector('.background').style.backgroundColor="red";
+    
     
     e.preventDefault();
 }
@@ -55,7 +79,7 @@ function changeToFrontSide(e)
     document.getElementById('front-background').style.display = 'inline';
     document.getElementById('front-side').style.backgroundColor = '#0a1e42';
     document.getElementById('back-side').style.backgroundColor = '#133879';
-    document.querySelector('.background').style.backgroundColor="red";
+    
     e.preventDefault();
 }
 

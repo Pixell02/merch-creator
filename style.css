@@ -81,6 +81,8 @@ img
     top: 0;
     height: 100%;
     width: 100%;
+    justify-content: center;
+    overflow: scroll;
     
 }
 #modal-creator
@@ -88,8 +90,8 @@ img
     background-color: white;
     margin: 10%;
     padding: 20px;
-    width: 80%;
-    height: 600px;
+    width: 1100px;
+    height: 480px;
     
     
 }
@@ -104,6 +106,7 @@ input[type=file]
 {
     display: none;
 }
+
 #image-t-shirt
 {
     display: inline;
@@ -193,11 +196,12 @@ input[type=file]
 }
 #file-upload, #file, #color, #hexa-color
 {
-    margin-left: 460px;
+    margin-left: 440px;
 }
 
 #pallet
 {
-    width: 200px;
+    width: 205px;
+    height: 250px;
 }
 
