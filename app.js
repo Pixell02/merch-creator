@@ -87,7 +87,7 @@ function changeToFrontSide(e)
 
 let upload = document.getElementById('file');
 let realBtn = document.getElementById('file-upload');
-let place = document.getElementById('chosen-image');
+const place = document.getElementById('chosen-image');
 let holder = document.getElementById('files-holder');
 upload.addEventListener('click',uploadFile);
 
@@ -106,6 +106,57 @@ function uploadFile(e)
     reader.onload = () =>
     {
         place.setAttribute("src",reader.result);
-
+        console.log(reader.result);
+        const holder = document.getElementById('files-holder');
+        let divRetriangle = document.createElement('div');
+        divRetriangle.style.height = '70px';
+        divRetriangle.style.width = 'auto';
+        divRetriangle.style.border = 'solid black 1px';
+        holder.appendChild(divRetriangle);
+        
+        let miniImage = document.createElement('img');
+        miniImage.setAttribute("src",reader.result);
+        miniImage.style.marginLeft = "10px";
+        miniImage.style.marginTop = "5px";
+        miniImage.style. height = "60px";
+        miniImage.style.maxWidth = "60px";
+        miniImage.style.justifyContent = "center";
+        divRetriangle.appendChild(miniImage);
+        let text = document.createElement("span");
+        text.textContent = realBtn.files[0].name;
+        text.style.color = "black";
+        text.style.position = "absolute";
+        text.style.marginTop = "25px";
+        text.style.width = "200px";
+        text.style.marginLeft = "10px";
+        text.style.height = "30px";
+        text.style.textAlign = "center";
+        text.style.fontFamily = "Roboto regular 400";
+        text.style.overflow = "hidden";
+        //text.style.backgroundColor = "red";
+        divRetriangle.appendChild(text);
+        let showIcon = document.createElement('img');
+        showIcon.setAttribute("src","open.png");
+        showIcon.style.width = "30px";
+        showIcon.style.float = "right";
+        showIcon.style.marginTop = "20px";
+        showIcon.style.marginRight = "40px";
+        console.log(showIcon.attributes);
+        showIcon.addEventListener('click',changeIcon);
+        function changeIcon(e)
+        {
+            if(showIcon.getAttribute('src')=="open.png")
+            {
+                showIcon.setAttribute("src","closed.png");
+                document.getElementById('logo').style.display = 'none';
+            }
+            else
+            {
+                showIcon.setAttribute("src","open.png");
+                document.getElementById('logo').style.display = 'block';
+            }
+            e.preventDefault();
+        }
+        divRetriangle.appendChild(showIcon);
     }
 }

@@ -225,10 +225,5 @@ input[type=file]
     width: 135px !important;
     height: auto;
     margin-left: 0;
-    z-index: 3;
-    
-    
-    
-    
-    
+    z-index: 3; 
 }
