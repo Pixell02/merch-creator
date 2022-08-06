@@ -226,4 +226,6 @@ input[type=file]
     height: auto;
     margin-left: 0;
     z-index: 3; 
+    overflow: hidden;
+    
 }

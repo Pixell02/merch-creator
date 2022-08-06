@@ -118,7 +118,7 @@ function uploadFile(e)
         miniImage.setAttribute("src",reader.result);
         miniImage.style.marginLeft = "10px";
         miniImage.style.marginTop = "5px";
-        miniImage.style. height = "60px";
+        miniImage.style. maxHeight = "60px";
         miniImage.style.maxWidth = "60px";
         miniImage.style.justifyContent = "center";
         divRetriangle.appendChild(miniImage);
@@ -131,7 +131,7 @@ function uploadFile(e)
         text.style.marginLeft = "10px";
         text.style.height = "30px";
         text.style.textAlign = "center";
-        text.style.fontFamily = "Roboto regular 400";
+        text.style.fontFamily = "Arial";
         text.style.overflow = "hidden";
         //text.style.backgroundColor = "red";
         divRetriangle.appendChild(text);
@@ -153,10 +153,22 @@ function uploadFile(e)
             else
             {
                 showIcon.setAttribute("src","open.png");
-                document.getElementById('logo').style.display = 'block';
+                document.getElementById('logo').style.display = 'flex';
             }
             e.preventDefault();
         }
         divRetriangle.appendChild(showIcon);
+        let imageOnTshirt = document.getElementById('chosen-image');
+        imageOnTshirt.addEventListener('mousedown',moveElement);
+        function moveElement(e)
+        {
+            let x = e.clientX;
+            let y = e.clientY;
+            imageOnTshirt.style.left = x + "px";
+            imageOnTshirt.style.top = y + "px";
+
+            
+        }
     }
+    
 }
