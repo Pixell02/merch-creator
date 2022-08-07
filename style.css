@@ -1,3 +1,4 @@
+/* Global and main page styling */
 body{
     margin: 0;
     background-color: #040913;
@@ -9,11 +10,13 @@ body{
     height: 60px;
     background-color: #071225;   
     color: white;
-    font-family: Montserrat medium;
     text-align: center;
     font-size: 30px;
     padding-top: 20px;
 }
+
+/* Styling items on main page */
+
 .merch 
 {
     width: 200px;
@@ -22,11 +25,10 @@ body{
     margin-top: 40px;
     
 }
-img
+.image
 {
     margin-left: -40px;
-    
-    
+
 }
 .merch .zoom-in figure img {
 	transform: scale(1);
@@ -39,7 +41,10 @@ img
 	display: block;
 	width: 200px;
 }
-#t-shirt, #modal button
+
+/* Styling Button class */
+
+.Button
 {
     
     color: white;
@@ -49,28 +54,21 @@ img
     height: 50px;
     transition: 1s;
     border-right: #1b305a solid;
-}
-#back-side, #file, #t-shirt
-{
     background-color: #133879;
 }
-#front-side
+.Button:hover
 {
-    background-color: #0a1e42;
+    background-color: #0a1e42 !important;
 }
-#t-shirt
+
+#create
 {
     
     margin-left: 148px;
     
 }
 
-
-#t-shirt:hover, #modal button:hover
-{
-    background-color: #0a1e42;
-}
-
+/* Styling modal window */
 
 #modal
 {
@@ -95,6 +93,28 @@ img
     
     
 }
+ #left-side, #middle, #files-holder
+{
+    float: left;
+}
+
+#middle
+{
+    height: 440px;
+    width: 300px;
+}
+
+/* Modal bar elements styling */
+
+#front-sideBtn
+{
+    background-color: #0a1e42;
+   
+}
+#saveBtn
+{
+    margin-left: 440px;
+}
 #closeBtn
 {
     float: right;
@@ -102,25 +122,35 @@ img
     top: 0;
     color: #155adb;
 }
+#closeBtn:hover, #closeBtn:focus
+{
+    color:#000000 ;
+}
+
 input[type=file]
 {
     display: none;
 }
 
-#image-t-shirt
-{
-    display: inline;
-    
-    
-    
-}
 #file
 {
-    position: absolute;
+    
     margin-top: 12px;
     margin-left: 50px;
 }
-#image-t-shirt .background
+
+/* Left-side styling elements */
+
+
+
+#left-side
+{
+    width: 410px;
+    height: 410px;
+    margin-top: 10px;
+    
+}
+#left-side .background
 {
     margin-top: 10px;
     border: rgba(0, 0, 0, 0.5) solid 1px;
@@ -129,104 +159,73 @@ input[type=file]
     mix-blend-mode: multiply;
     
 }
-#color
+.images
 {
-    width: 205px;
-    height: 250px;
-    border: #040913 solid 1px;
     position: absolute;
-    display: inline;
-    margin-left: 50px;
-    margin-top: 100px;
+    max-height: 250px;
+    margin-top: 110px;
+    margin-left: 135px;
+    max-width: 135px;
+    overflow: hidden;
+    z-index: 4;
 }
-#hexa-color
+.chosen-frontSide-image
 {
-    margin-left: 50px;
-    width: 200px;
-    font-size: 20px;
+    width: 135px;
+}
+.chosen-backSide-image
+{
+    width: 135px;
+    display: none;
+}
+#front
+{
     position: absolute;
-    margin-top: 390px;
-}
-#files-holder
-{
-    border: #040913 solid 1px; 
-    float: right;
-    width: 350px;
-    height: 408px;
-    margin-top: 10px;
-    margin-right: 10px;
-}
-#closeBtn:hover, #closeBtn:focus
-{
-    color:#000000 ;
 }
 #back
 {
     display: none;
     position: absolute;
 }
-#front
-{
-    
-    position: absolute;
-    z-index: 1;
-}
-#front-background
-{
-    position: absolute;
-    width: 100%;
-    z-index: 2;
-    
-}
 #back-background
 {
-    position: absolute;
     display: none;
-    
- 
 }
-#mix
-{
-    display: flex;
-    width: 410px;
-}
-#other
-{
-    display: inline;
-    
-}
-#file-upload, #file, #color, #hexa-color
-{
-    margin-left: 440px;
-}
+
+/* middle element styling */
 
 #pallet
 {
     width: 205px;
-    height: 250px;
+    height: 300px;
+    position: relative;
+    margin-left: 50px;
+    margin-top: 10px;
+    border: none;
 }
 
-#logo
+#hexa-color
 {
-    
-    width: 135px;
-    display: flex;
-    position: absolute;
-    max-height: 250px;
-    margin-top: 110px;
-    margin-left: 135px;
-    justify-content: center;
-    overflow: hidden;
-    z-index: 4;
+    width: 190px;
+    font-size: 20px;
+    margin-left: 50px;
+    margin-top: 20px;
 }
-#chosen-image
+
+/* Right side/Files-holder styling */
+
+#files-holder
 {
-    width: 135px !important;
-    max-height: auto;
-    margin-left: 0;
-    z-index: 3; 
-    
-    
-    
-    
+    border: #040913 solid 1px; 
+    width: 350px;
+    height: 410px;
+    margin-top: 10px;
+    margin-right: 10px;
+    overflow: scroll;
 }
+
+
+
+
+
+

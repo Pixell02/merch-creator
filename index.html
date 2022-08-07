@@ -21,19 +21,31 @@
         </section> 
     </section>
     
-    <button id="t-shirt">Create</button>
+    <button id="create" class="Button">Create</button>
     <div id="modal">
         <div id="modal-creator" >
-            <div id="modal-bar"><button id="front-side" class="Button">Front side</button><button id="back-side" class="Button">Back side</button><span id="closeBtn">&times;</span></div>
-    <div id="image-t-shirt">
-        <div id="mix">
-            <div id="logo"><img id="chosen-image" ></div>
-            <img src="front-t-shirt.png" alt="front-t-shirt" id="front" class="background"><img src="front-background.png" alt="front-background" id="front-background" class="background">
-            <img src="back-t-shirt.png" alt="back-t-shirt" id="back" class="background"><img src="back-background.png" alt="back-background" id="back-background" class="background"></div>
+            <div id="modal-bar"><button id="front-sideBtn" class="Button">Front side</button>
+                <button id="back-sideBtn" class="Button">Back side</button>
+                <button id="saveBtn" class="Button">Save</button>
+                <span id="closeBtn">&times;</span>
+            </div>
+    
+        <div id="left-side">
+            <div id="frontSide-logo"></div>
+            <div id="backSide-logo"><img class="chosen-backSide-image" ></div>
+            <img src="front-t-shirt.png" alt="front-t-shirt" id="front" class="background">
+            <img src="front-background.png" alt="front-background" id="front-background" class="background">
+            <img src="back-t-shirt.png" alt="back-t-shirt" id="back" class="background">
+            <img src="back-background.png" alt="back-background" id="back-background" class="background">
         </div>
-        <div id="other"><input type="file" class="Button" id="file-upload" accept="image/*"> <button id="file">Upload</button><div id="color"><input type="color" name="" id="pallet"></div>
+
+        <div id="middle"><input type="file" class="Button" id="file-upload" accept="image/*"> 
+            <button id="file" class="Button">Upload</button>
+            <input type="color" id="pallet">
         <input type="text" id="hexa-color" placeholder="example: 000000" maxlength="6">
-    <div id="files-holder"></div></div>
+        </div>
+        <div id="files-holder"></div>
+    </div>
     </div> 
     </div>
     <script src="app.js"></script>

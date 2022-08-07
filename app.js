@@ -1,7 +1,7 @@
     // Get modal element
     let modal = document.getElementById('modal');
     // Get open button
-    let openBtn = document.getElementById('t-shirt');
+    let openBtn = document.getElementById('create');
     // Closing button
     let closeBtn = document.getElementById('closeBtn');
     // Opening modal window
@@ -34,10 +34,9 @@
         e.preventDefault();
     }
 
-    //
+    
     //Getting color value from input
-    //
-
+    
     const inputColor = document.getElementById('hexa-color');
 
     inputColor.addEventListener('input',inputValue);
@@ -49,51 +48,14 @@
         e.preventDefault();
     }
 
-
-    // Get button side
-
-    let backSide = document.getElementById('back-side');
-
-    let frontSide = document.getElementById('front-side');
-
-    // Listening backSide Btn
-
-    backSide.addEventListener('click',changeToBackSide);
-
-    function changeToBackSide(e)
-    {
-
-        document.getElementById('front').style.display = 'none';
-        document.getElementById('back').style.display = 'inline';
-        document.getElementById('back-background').style.display = 'inline';
-        document.getElementById('front-background').style.display = 'none';
-        document.getElementById('back-side').style.backgroundColor = '#0a1e42';
-        document.getElementById('front-side').style.backgroundColor = '#133879';
-        
-        e.preventDefault();
-    }
-
-    // Listening frontSide Btn
-
-    frontSide.addEventListener('click',changeToFrontSide);
-
-    function changeToFrontSide(e)
-    {
-        document.getElementById('front').style.display = 'inline';
-        document.getElementById('back').style.display = 'none';
-        document.getElementById('back-background').style.display = 'none';
-        document.getElementById('front-background').style.display = 'inline';
-        document.getElementById('front-side').style.backgroundColor = '#0a1e42';
-        document.getElementById('back-side').style.backgroundColor = '#133879';
+    let addImage;
     
-        e.preventDefault();
-    }
 
     // Getting Upload Btn by click edited Btn
+    
 
     const upload = document.getElementById('file');
     let realBtn = document.getElementById('file-upload');
-    const place = document.getElementById('chosen-image');
     const holder = document.getElementById('files-holder');
 
     // Listening Upload Btn
@@ -105,19 +67,49 @@
         realBtn.click();
         e.preventDefault();
     }
-
+    let frontSide = document.getElementById('front-sideBtn');
+    let backSide = document.getElementById('back-sideBtn');
+    let frontSideBtn = true;
+    let arrayLength;
+    frontSide.addEventListener('click', btnValue)
+    function btnValue(e)
+    {
+        frontSideBtn=true;
+        e.preventDefault();
+    }
+    backSide.addEventListener('click', backBtnValue)
+    function backBtnValue(e)
+    {
+        frontSideBtn=false;
+        e.preventDefault();
+    }
     // Uploading image file and creating object
-
+    //let place = document.getElementById('image'+arrayLength);
     realBtn.onchange = () => {
     let reader = new FileReader();
-    reader.readAsDataURL(realBtn.files[0]);
-    console.log(realBtn.files[0]);
-    reader.onload = () =>
+    arrayLength = realBtn.files.length-1;
+    console.log(arrayLength);
+    reader.readAsDataURL(realBtn.files[arrayLength]);
+    addImage = document.createElement('img');
+    
+    
+    if(frontSideBtn == true)
     {
+        addImage.id = "frontSide"+arrayLength;
+    }
+    else
+    {
+        addImage.id = "backSide"+arrayLength;
+    }
+    addImage.className = "images";
+    addImage.style.zIndex = "4";
+    console.log(realBtn.files[arrayLength]);
+    reader.onload = () =>
+    { 
         // Placing image on t-shirt
-
-        place.setAttribute("src",reader.result);
         
+        addImage.setAttribute("src",reader.result);
+        document.getElementById('frontSide-logo').appendChild(addImage);
 
         // Assignment files holder to a variable
 
@@ -126,9 +118,17 @@
         // Creating div and styling 
 
         let divRetriangle = document.createElement('div');
+        if(frontSideBtn == true)
+        {
+        divRetriangle.id = "front-index"+arrayLength;
+        }
+        else
+        {
+            divRetriangle.id = "back-index"+arrayLength; 
+        }
         divRetriangle.style.height = '70px';
         divRetriangle.style.width = 'auto';
-        divRetriangle.style.border = 'solid black 1px';
+        divRetriangle.style.borderBottom = 'solid black 1px';
         holder.appendChild(divRetriangle);
         
         // Creating image element
@@ -154,7 +154,7 @@
 
         //  Assigment name of file to variable to show on website      
 
-        text.textContent = realBtn.files[0].name;
+        text.innerHTML = realBtn.files[0].name;
 
         // Styling name of file
 
@@ -188,37 +188,122 @@
         // Listening event on icon
 
         showIcon.addEventListener('click',changeIcon);
+
+        //Changing icon
+        
+
         function changeIcon(e)
         {
+            let countImages = document.getElementsByClassName("images");
+            console.log(countImages);
             if(showIcon.getAttribute('src')=="open.png")
             {
                 showIcon.setAttribute("src","closed.png");
-                document.getElementById('logo').style.display = 'none';
+                for(let i = 0 ; i <= countImages.length ; i++)
+                {
+                    countImages[i].style.display = "none";
+                    console.log(countImages[i].style.display);
+                }
             }
             else
             {
                 showIcon.setAttribute("src","open.png");
-                document.getElementById('logo').style.display = 'flex';
+                for(let i = 0 ; i <= countImages.length ; i++)
+                {
+                    countImages[i].style.display = "flex"; 
+                    console.log(countImages[i].style.display);
+                }
+                
             }
+            
             e.preventDefault();
         }
         divRetriangle.appendChild(showIcon);
-
-       
+        
+    }
         }
+        
+        // Listening and getting frontSide Btn
+
+        
+    
+    frontSide.addEventListener('click',changeToFrontSide);
+
+    function changeToFrontSide(e)
+    {
+        document.getElementById('front').style.display = 'inline';
+        document.getElementById('back').style.display = 'none';
+        document.getElementById('back-background').style.display = 'none';
+        document.getElementById('front-background').style.display = 'inline';
+        document.getElementById('front-sideBtn').style.backgroundColor = '#0a1e42';
+        document.getElementById('back-sideBtn').style.backgroundColor = '#133879';
+        for(let i = 0 ; i <= arrayLength ; i++)
+            {
+                document.getElementById("frontSide"+i).style.display = "flex";
+            }
+        for(let i = 0 ; i <= arrayLength ; i++)
+            {
+                document.getElementById("backSide"+i).style.display = "none";
+            }
+        for(let i = 0 ; i<=arrayLength ; i++)
+            {
+                document.getElementById("front-index"+i).style.display = "flex";
+            }
+        for(let i = 0 ; i<=arrayLength ; i++)
+            {
+                document.getElementById("back-index"+i).style.display = "none";
+            }
+        e.preventDefault();
+    }
+        // Get button backSide
+
+    
+
+    // Listening backSide Btn
+
+    backSide.addEventListener('click',changeToBackSide);
+
+    function changeToBackSide(e)
+    {
+
+        document.getElementById('front').style.display = 'none';
+        document.getElementById('back').style.display = 'inline';
+        document.getElementById('back-background').style.display = 'inline';
+        document.getElementById('front-background').style.display = 'none';
+        document.getElementById('back-sideBtn').style.backgroundColor = '#0a1e42';
+        document.getElementById('front-sideBtn').style.backgroundColor = '#133879';
+        for(let i = 0 ; i <= arrayLength ; i++)
+            {
+                document.getElementById("frontSide"+i).style.display = "none";
+            }
+        for(let i = 0 ; i <= arrayLength ; i++)
+            {
+                document.getElementById("backSide"+i).style.display = "flex";
+            }
+        for(let i = 0 ; i<=arrayLength ; i++)
+            {
+                document.getElementById("front-index"+i).style.display = "none";
+            }
+        for(let i = 0 ; i<=arrayLength ; i++)
+            {
+                document.getElementById("back-index"+i).style.display = "flex";
+            }
+        e.preventDefault();
     }
      // Moving image to indicated place
 
-        let imageOnTshirt = document.getElementById('chosen-image');
+        // let imageOnTshirt = document.getElementById('chosen-frontSide-image');
         
-        imageOnTshirt.addEventListener('mousemove',moveElement);
-        function moveElement(e)
-        {
-            let x = e.clientX;
-            let y = e.clientY;
-            imageOnTshirt.style.left = x + "px";
-            imageOnTshirt.style.top = y + "px";
+        // imageOnTshirt.addEventListener('mousemove',moveElement);
+        // function moveElement(e)
+        // {
+        //     let x = e.clientX;
+        //     let y = e.clientY;
+        //     imageOnTshirt.style.left = x + "px";
+        //     imageOnTshirt.style.top = y + "px";
 
-            e.preventDefault();
-        }
+        //     e.preventDefault();
+        // }
+        
+        // Only fronSide elements
         
