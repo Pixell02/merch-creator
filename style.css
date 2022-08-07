@@ -188,7 +188,6 @@ input[type=file]
 #mix
 {
     display: flex;
-    
     width: 410px;
 }
 #other
@@ -210,7 +209,7 @@ input[type=file]
 #logo
 {
     
-    max-width: 135px;
+    width: 135px;
     display: flex;
     position: absolute;
     max-height: 250px;
@@ -218,14 +217,16 @@ input[type=file]
     margin-left: 135px;
     justify-content: center;
     overflow: hidden;
-     
+    z-index: 4;
 }
 #chosen-image
 {
     width: 135px !important;
-    height: auto;
+    max-height: auto;
     margin-left: 0;
     z-index: 3; 
-    overflow: hidden;
+    
+    
+    
     
 }
