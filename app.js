@@ -49,6 +49,9 @@
     }
 
     let addImage;
+    let showIcon;
+    let showHideFront = [];
+    let showHideBack = [];
     
 
     // Getting Upload Btn by click edited Btn
@@ -84,26 +87,43 @@
         e.preventDefault();
     }
     // Uploading image file and creating object
-    //let place = document.getElementById('image'+arrayLength);
+    
     realBtn.onchange = () => {
     let reader = new FileReader();
     arrayLength = realBtn.files.length-1;
-    console.log(arrayLength);
     reader.readAsDataURL(realBtn.files[arrayLength]);
     addImage = document.createElement('img');
     
     
     if(frontSideBtn == true)
     {
+        if(document.getElementsByClassName('frontSide').length > 0)
+        {
+            arrayLength = document.getElementsByClassName('frontSide').length;
+        }
+        else
+        {
+            arrayLength = 0;
+        }
         addImage.id = "frontSide"+arrayLength;
+        addImage.className = "frontSide";
     }
     else
     {
+        if(document.getElementsByClassName('backSide').length > 0)
+        {
+            arrayLength = document.getElementsByClassName('backSide').length;
+        }
+        else
+        {
+            arrayLength = 0;
+        }
         addImage.id = "backSide"+arrayLength;
+        addImage.className = "backSide";
     }
-    addImage.className = "images";
-    addImage.style.zIndex = "4";
-    console.log(realBtn.files[arrayLength]);
+    
+    addImage.style.zIndex = parseInt(4+arrayLength);
+    
     reader.onload = () =>
     { 
         // Placing image on t-shirt
@@ -121,10 +141,12 @@
         if(frontSideBtn == true)
         {
         divRetriangle.id = "front-index"+arrayLength;
+        divRetriangle.className = "front-index";
         }
         else
         {
             divRetriangle.id = "back-index"+arrayLength; 
+            divRetriangle.className = "back-index";
         }
         divRetriangle.style.height = '70px';
         divRetriangle.style.width = 'auto';
@@ -143,7 +165,7 @@
 
         miniImage.style.marginLeft = "10px";
         miniImage.style.marginTop = "5px";
-        miniImage.style. maxHeight = "60px";
+        miniImage.style.maxHeight = "60px";
         miniImage.style.maxWidth = "60px";
         miniImage.style.justifyContent = "center";
         divRetriangle.appendChild(miniImage);
@@ -174,7 +196,7 @@
 
         // Creating image element
 
-        let showIcon = document.createElement('img');
+         showIcon = document.createElement('img');
 
         // Styling and setting image
 
@@ -183,7 +205,20 @@
         showIcon.style.float = "right";
         showIcon.style.marginTop = "20px";
         showIcon.style.marginRight = "40px";
-        console.log(showIcon.attributes);
+        if(frontSideBtn == true)
+        {
+            showIcon.id = "frontIcon"+arrayLength;
+            showIcon.className = "frontIcon";
+            showHideFront[arrayLength] = true;
+            
+        }
+        else
+        {
+            showIcon.id = "backIcon"+arrayLength;
+            showIcon.className = "backIcon";
+            showHideBack[arrayLength] = true;
+        }
+        
 
         // Listening event on icon
 
@@ -192,37 +227,56 @@
         //Changing icon
         
 
+        
+        divRetriangle.appendChild(showIcon);
+        
+    }
+        }
         function changeIcon(e)
         {
-            let countImages = document.getElementsByClassName("images");
-            console.log(countImages);
-            if(showIcon.getAttribute('src')=="open.png")
+            let getIcon = e.target.id;
+            let idText = getIcon.match(/\d/g).join('');
+            console.log(idText);
+                       
+            showIcon = e.target;
+            if(showIcon.getAttribute('src') == "open.png")
             {
                 showIcon.setAttribute("src","closed.png");
-                for(let i = 0 ; i <= countImages.length ; i++)
+                if(frontSideBtn == true)
                 {
-                    countImages[i].style.display = "none";
-                    console.log(countImages[i].style.display);
+                    document.getElementById("frontSide"+idText).style.display = "none";
+                    showHideFront[idText] = false;
+                    console.log(showHideFront[idText]);
                 }
+                else
+                {
+                    document.getElementById("backSide"+idText).style.display = "none";
+                    showHideBack[idText] = false;
+                    console.log(showHideBack[idText]);
+                }
+               
             }
             else
             {
                 showIcon.setAttribute("src","open.png");
-                for(let i = 0 ; i <= countImages.length ; i++)
-                {
-                    countImages[i].style.display = "flex"; 
-                    console.log(countImages[i].style.display);
-                }
+               if(frontSideBtn == true)
+               {
+                    document.getElementById("frontSide"+idText).style.display = "initial";
+                    showHideFront[idText] = true;
+                    console.log(showHideFront[idText]);
+               }
+               else
+               {
+                    document.getElementById("backSide"+idText).style.display = "initial";
+                    showHideBack[idText] = true;
+                    console.log(showHideBack[idText]);
+               }
+                
                 
             }
             
             e.preventDefault();
         }
-        divRetriangle.appendChild(showIcon);
-        
-    }
-        }
-        
         // Listening and getting frontSide Btn
 
         
@@ -238,20 +292,83 @@
         document.getElementById('front-sideBtn').style.backgroundColor = '#0a1e42';
         document.getElementById('back-sideBtn').style.backgroundColor = '#133879';
         for(let i = 0 ; i <= arrayLength ; i++)
-            {
-                document.getElementById("frontSide"+i).style.display = "flex";
-            }
+        {
+            console.log(showHideFront[i]);
+            
+
+        }
+            if( document.getElementsByClassName("frontSide").length > 0)
+                {
+                    for(let i = 0 ; i <= arrayLength ; i++)
+                    {
+                
+                
+                    if(showHideFront[i] == true)
+                    {
+                        document.getElementById("frontSide"+i).style.display = "flex";
+                    }
+                    else
+                    {
+                        document.getElementById("frontSide"+i).style.display = "none";
+                    }
+                    }
+                }
+                else
+                {
+                    console.log("false");
+                    
+                }
+
+            
         for(let i = 0 ; i <= arrayLength ; i++)
             {
-                document.getElementById("backSide"+i).style.display = "none";
+                
+                if(document.getElementsByClassName('backSide').length > 0)
+                {
+                    document.getElementById("backSide"+i).style.display = "none";
+                    
+                }
+                else
+                {
+                    console.log("false");
+                    break;
+                }
             }
         for(let i = 0 ; i<=arrayLength ; i++)
             {
-                document.getElementById("front-index"+i).style.display = "flex";
+                
+                if(document.getElementsByClassName("front-index").length > 0)
+                {
+                    document.getElementById('front-index'+i).style.display = "inherit";
+                    if(showHideFront[i] == true)
+                    {
+                        document.getElementById("frontIcon"+i).setAttribute("src","open.png");
+                    }
+                    else
+                    {
+                        document.getElementById("frontIcon"+i).setAttribute("src","closed.png");
+                    }
+                    
+                }
+                else
+                {
+                    console.log("false");
+                    break;
+                }
             }
         for(let i = 0 ; i<=arrayLength ; i++)
             {
-                document.getElementById("back-index"+i).style.display = "none";
+                
+                if(document.getElementsByClassName("back-index").length > 0)
+                {
+                    document.getElementById("back-index"+i).style.display = "none";
+                    
+                }
+                else
+                {
+                    showHideBack[i] = null;
+                    break;
+                }
             }
         e.preventDefault();
     }
@@ -265,6 +382,12 @@
 
     function changeToBackSide(e)
     {
+        for(let i = 0 ; i <= arrayLength ; i++)
+        {
+            
+            console.log(showHideBack[i]);
+
+        }
 
         document.getElementById('front').style.display = 'none';
         document.getElementById('back').style.display = 'inline';
@@ -274,19 +397,74 @@
         document.getElementById('front-sideBtn').style.backgroundColor = '#133879';
         for(let i = 0 ; i <= arrayLength ; i++)
             {
-                document.getElementById("frontSide"+i).style.display = "none";
+                
+                if(document.getElementsByClassName("frontSide").length > 0)
+                {
+                    document.getElementById("frontSide"+i).style.display = "none";
+                }
+                else
+                {
+                    
+                    console.log("false");
+                    break;
+                }
             }
         for(let i = 0 ; i <= arrayLength ; i++)
             {
-                document.getElementById("backSide"+i).style.display = "flex";
+                
+                if(document.getElementsByClassName("backSide").length > 0)
+                {
+                    
+                    if(showHideBack[i] == true)
+                    {
+                        document.getElementById("backIcon"+i).setAttribute("src","open.png");
+                        document.getElementById("backSide"+i).style.display = "inherit";
+                    }
+                    else
+                    {
+                        document.getElementById("backIcon"+i).setAttribute("src","closed.png");
+                        document.getElementById("backSide"+i).style.display = "none";
+                    }
+                }
+                else
+                {
+                    showHideBack[i] = null;
+                    break;
+                }
+            }
+        for(let i = 0 ; i <= arrayLength ; i++)
+            {   
+                
+                if(document.getElementsByClassName('front-index').length > 0)
+                {
+                    document.getElementById("front-index"+i).style.display = "none";
+                }
+                else
+                {
+                    console.log("false");
+                    break;
+                }
             }
         for(let i = 0 ; i<=arrayLength ; i++)
-            {
-                document.getElementById("front-index"+i).style.display = "none";
-            }
-        for(let i = 0 ; i<=arrayLength ; i++)
-            {
-                document.getElementById("back-index"+i).style.display = "flex";
+            {   
+                
+                if(document.getElementsByClassName("back-index").length > 0)
+                {
+                    document.getElementById("back-index"+i).style.display = "inherit";
+                    if(showHideBack[i] == true)
+                    {
+                        document.getElementById("backIcon"+i).setAttribute("src","open.png");
+                    }
+                    else
+                    {
+                        document.getElementById("backIcon"+i).setAttribute("src","closed.png");
+                    }
+                }
+                else
+                {
+                    
+                    break;
+                }
             }
         e.preventDefault();
     }

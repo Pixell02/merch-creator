@@ -159,7 +159,7 @@ input[type=file]
     mix-blend-mode: multiply;
     
 }
-.images
+.frontSide, .backSide
 {
     position: absolute;
     max-height: 250px;
@@ -169,7 +169,7 @@ input[type=file]
     overflow: hidden;
     z-index: 4;
 }
-.chosen-frontSide-image
+/* .chosen-frontSide-image
 {
     width: 135px;
 }
@@ -177,7 +177,7 @@ input[type=file]
 {
     width: 135px;
     display: none;
-}
+} */
 #front
 {
     position: absolute;
