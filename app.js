@@ -74,6 +74,8 @@
     let backSide = document.getElementById('back-sideBtn');
     let frontSideBtn = true;
     let arrayLength;
+    let frontArrayLength;
+    let backArrayLength;
     frontSide.addEventListener('click', btnValue)
     function btnValue(e)
     {
@@ -99,26 +101,28 @@
     {
         if(document.getElementsByClassName('frontSide').length > 0)
         {
-            arrayLength = document.getElementsByClassName('frontSide').length;
+            frontArrayLength = document.getElementsByClassName('frontSide').length;
+            addImage.style.zIndex = parseInt(4+frontArrayLength);
         }
         else
         {
-            arrayLength = 0;
+            frontArrayLength = 0;
         }
-        addImage.id = "frontSide"+arrayLength;
+        addImage.id = "frontSide"+frontArrayLength;
         addImage.className = "frontSide";
     }
     else
     {
         if(document.getElementsByClassName('backSide').length > 0)
         {
-            arrayLength = document.getElementsByClassName('backSide').length;
+            backArrayLength = document.getElementsByClassName('backSide').length;
+            addImage.style.zIndex = parseInt(4+backArrayLength);
         }
         else
         {
-            arrayLength = 0;
+            backArrayLength = 0;
         }
-        addImage.id = "backSide"+arrayLength;
+        addImage.id = "backSide"+backArrayLength;
         addImage.className = "backSide";
     }
     
@@ -140,12 +144,12 @@
         let divRetriangle = document.createElement('div');
         if(frontSideBtn == true)
         {
-        divRetriangle.id = "front-index"+arrayLength;
+        divRetriangle.id = "front-index"+frontArrayLength;
         divRetriangle.className = "front-index";
         }
         else
         {
-            divRetriangle.id = "back-index"+arrayLength; 
+            divRetriangle.id = "back-index"+backArrayLength; 
             divRetriangle.className = "back-index";
         }
         divRetriangle.style.height = '70px';
@@ -207,16 +211,16 @@
         showIcon.style.marginRight = "40px";
         if(frontSideBtn == true)
         {
-            showIcon.id = "frontIcon"+arrayLength;
+            showIcon.id = "frontIcon"+frontArrayLength;
             showIcon.className = "frontIcon";
-            showHideFront[arrayLength] = true;
+            showHideFront[frontArrayLength] = true;
             
         }
         else
         {
-            showIcon.id = "backIcon"+arrayLength;
+            showIcon.id = "backIcon"+backArrayLength;
             showIcon.className = "backIcon";
-            showHideBack[arrayLength] = true;
+            showHideBack[backArrayLength] = true;
         }
         
 
@@ -291,7 +295,7 @@
         document.getElementById('front-background').style.display = 'inline';
         document.getElementById('front-sideBtn').style.backgroundColor = '#0a1e42';
         document.getElementById('back-sideBtn').style.backgroundColor = '#133879';
-        for(let i = 0 ; i <= arrayLength ; i++)
+        for(let i = 0 ; i <= frontArrayLength ; i++)
         {
             console.log(showHideFront[i]);
             
@@ -299,7 +303,7 @@
         }
             if( document.getElementsByClassName("frontSide").length > 0)
                 {
-                    for(let i = 0 ; i <= arrayLength ; i++)
+                    for(let i = 0 ; i <= frontArrayLength ; i++)
                     {
                 
                 
@@ -320,7 +324,7 @@
                 }
 
             
-        for(let i = 0 ; i <= arrayLength ; i++)
+        for(let i = 0 ; i <= backArrayLength ; i++)
             {
                 
                 if(document.getElementsByClassName('backSide').length > 0)
@@ -334,7 +338,7 @@
                     break;
                 }
             }
-        for(let i = 0 ; i<=arrayLength ; i++)
+        for(let i = 0 ; i<=frontArrayLength ; i++)
             {
                 
                 if(document.getElementsByClassName("front-index").length > 0)
@@ -356,7 +360,7 @@
                     break;
                 }
             }
-        for(let i = 0 ; i<=arrayLength ; i++)
+        for(let i = 0 ; i<=backArrayLength ; i++)
             {
                 
                 if(document.getElementsByClassName("back-index").length > 0)
@@ -382,7 +386,7 @@
 
     function changeToBackSide(e)
     {
-        for(let i = 0 ; i <= arrayLength ; i++)
+        for(let i = 0 ; i <= backArrayLength ; i++)
         {
             
             console.log(showHideBack[i]);
@@ -395,7 +399,7 @@
         document.getElementById('front-background').style.display = 'none';
         document.getElementById('back-sideBtn').style.backgroundColor = '#0a1e42';
         document.getElementById('front-sideBtn').style.backgroundColor = '#133879';
-        for(let i = 0 ; i <= arrayLength ; i++)
+        for(let i = 0 ; i <= frontArrayLength ; i++)
             {
                 
                 if(document.getElementsByClassName("frontSide").length > 0)
@@ -409,7 +413,7 @@
                     break;
                 }
             }
-        for(let i = 0 ; i <= arrayLength ; i++)
+        for(let i = 0 ; i <= backArrayLength ; i++)
             {
                 
                 if(document.getElementsByClassName("backSide").length > 0)
@@ -432,7 +436,7 @@
                     break;
                 }
             }
-        for(let i = 0 ; i <= arrayLength ; i++)
+        for(let i = 0 ; i <= frontArrayLength ; i++)
             {   
                 
                 if(document.getElementsByClassName('front-index').length > 0)
@@ -445,7 +449,7 @@
                     break;
                 }
             }
-        for(let i = 0 ; i<=arrayLength ; i++)
+        for(let i = 0 ; i<=backArrayLength ; i++)
             {   
                 
                 if(document.getElementsByClassName("back-index").length > 0)
@@ -469,19 +473,23 @@
         e.preventDefault();
     }
      // Moving image to indicated place
-
-        // let imageOnTshirt = document.getElementById('chosen-frontSide-image');
         
-        // imageOnTshirt.addEventListener('mousemove',moveElement);
-        // function moveElement(e)
-        // {
-        //     let x = e.clientX;
-        //     let y = e.clientY;
-        //     imageOnTshirt.style.left = x + "px";
-        //     imageOnTshirt.style.top = y + "px";
-
-        //     e.preventDefault();
-        // }
+        // let imageSelect = document.querySelector('#frontSide-logo');
         
-        // Only fronSide elements
+        //  imageSelect.addEventListener('click',selectElement);
+        //  function selectElement(e)
+        //     {
+        //         let imageClick = e.target.id;
+        //         imageClick.addEventListener('mousemove',moveElement)
+        //         function moveElement(e)
+        //         {
+        //             let x = e.clientX;
+        //             let y = e.clientY;
+        //             imageClick.style.left = x + "px";
+        //             imageClick.style.top = y + "px";
+        //             e.preventDefault();
+        //         }
+        //      e.preventDefault();
+        //      }
+        
         
