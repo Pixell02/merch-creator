@@ -90,204 +90,201 @@
     }
     // Uploading image file and creating object
     
-    realBtn.onchange = () => {
-    let reader = new FileReader();
-    arrayLength = realBtn.files.length-1;
-    reader.readAsDataURL(realBtn.files[arrayLength]);
-    addImage = document.createElement('img');
-    
-    
-    if(frontSideBtn == true)
+    realBtn.onchange = () => 
     {
-        if(document.getElementsByClassName('frontSide').length > 0)
-        {
-            frontArrayLength = document.getElementsByClassName('frontSide').length;
-            addImage.style.zIndex = parseInt(4+frontArrayLength);
-        }
-        else
-        {
-            frontArrayLength = 0;
-        }
-        addImage.id = "frontSide"+frontArrayLength;
-        addImage.className = "frontSide";
-    }
-    else
-    {
-        if(document.getElementsByClassName('backSide').length > 0)
-        {
-            backArrayLength = document.getElementsByClassName('backSide').length;
-            addImage.style.zIndex = parseInt(4+backArrayLength);
-        }
-        else
-        {
-            backArrayLength = 0;
-        }
-        addImage.id = "backSide"+backArrayLength;
-        addImage.className = "backSide";
-    }
+        let reader = new FileReader();
+        arrayLength = realBtn.files.length-1;
+        reader.readAsDataURL(realBtn.files[arrayLength]);
+        addImage = document.createElement('img');
     
-    addImage.style.zIndex = parseInt(4+arrayLength);
     
-    reader.onload = () =>
-    { 
+         if(frontSideBtn == true)
+        {
+             if(document.getElementsByClassName('frontSide').length > 0)
+            {
+                frontArrayLength = document.getElementsByClassName('frontSide').length;
+                addImage.style.zIndex = parseInt(4+frontArrayLength);
+            }
+             else
+            {
+                frontArrayLength = 0;
+            }
+            addImage.id = "frontSide"+frontArrayLength;
+            addImage.className = "frontSide";
+        }
+         else
+        {
+             if(document.getElementsByClassName('backSide').length > 0)
+            {
+                backArrayLength = document.getElementsByClassName('backSide').length;
+                addImage.style.zIndex = parseInt(4+backArrayLength);
+            }
+             else
+            {
+                backArrayLength = 0;
+            }
+            addImage.id = "backSide"+backArrayLength;
+            addImage.className = "backSide";
+        }
+    
+        addImage.style.zIndex = parseInt(4+arrayLength);
+    
+        reader.onload = () =>
+        { 
         // Placing image on t-shirt
         
-        addImage.setAttribute("src",reader.result);
-        document.getElementById('frontSide-logo').appendChild(addImage);
+            addImage.setAttribute("src",reader.result);
+            document.getElementById('frontSide-logo').appendChild(addImage);
 
         // Assignment files holder to a variable
 
-        const holder = document.getElementById('files-holder');
+            const holder = document.getElementById('files-holder');
 
         // Creating div and styling 
 
-        let divRetriangle = document.createElement('div');
-        if(frontSideBtn == true)
-        {
-        divRetriangle.id = "front-index"+frontArrayLength;
-        divRetriangle.className = "front-index";
-        }
-        else
-        {
-            divRetriangle.id = "back-index"+backArrayLength; 
-            divRetriangle.className = "back-index";
-        }
-        divRetriangle.style.height = '70px';
-        divRetriangle.style.width = 'auto';
-        divRetriangle.style.borderBottom = 'solid black 1px';
-        holder.appendChild(divRetriangle);
+            let divRetriangle = document.createElement('div');
+            if(frontSideBtn == true)
+             {
+                divRetriangle.id = "front-index"+frontArrayLength;
+                divRetriangle.className = "front-index";
+            }
+             else
+            {
+                divRetriangle.id = "back-index"+backArrayLength; 
+                divRetriangle.className = "back-index";
+            }
+            divRetriangle.style.height = '70px';
+            divRetriangle.style.width = 'auto';
+            divRetriangle.style.borderBottom = 'solid black 1px';
+            holder.appendChild(divRetriangle);
         
         // Creating image element
 
-        let miniImage = document.createElement('img');
+            let miniImage = document.createElement('img');
 
         // Assigment loaded image to variable
 
-        miniImage.setAttribute("src",reader.result);
+            miniImage.setAttribute("src",reader.result);
 
         // Styling image variable
 
-        miniImage.style.marginLeft = "10px";
-        miniImage.style.marginTop = "5px";
-        miniImage.style.maxHeight = "60px";
-        miniImage.style.maxWidth = "60px";
-        miniImage.style.justifyContent = "center";
-        divRetriangle.appendChild(miniImage);
+            miniImage.style.marginLeft = "10px";
+            miniImage.style.marginTop = "5px";
+            miniImage.style.maxHeight = "60px";
+            miniImage.style.maxWidth = "60px";
+            miniImage.style.justifyContent = "center";
+            divRetriangle.appendChild(miniImage);
 
         // Creating file name element
 
-        let text = document.createElement("span");
+            let text = document.createElement("span");
 
         //  Assigment name of file to variable to show on website      
 
-        text.innerHTML = realBtn.files[0].name;
+            text.innerHTML = realBtn.files[0].name;
 
         // Styling name of file
 
-        text.style.color = "black";
-        text.style.position = "absolute";
-        text.style.marginTop = "25px";
-        text.style.width = "200px";
-        text.style.marginLeft = "10px";
-        text.style.height = "30px";
-        text.style.textAlign = "center";
-        text.style.fontFamily = "Arial";
-        text.style.overflow = "hidden";
+            text.style.color = "black";
+            text.style.position = "absolute";
+            text.style.marginTop = "25px";
+            text.style.width = "200px";
+            text.style.marginLeft = "10px";
+            text.style.height = "30px";
+            text.style.textAlign = "center";
+            text.style.fontFamily = "Arial";
+            text.style.overflow = "hidden";
 
         // Selecting div to put element into div
 
-        divRetriangle.appendChild(text);
+            divRetriangle.appendChild(text);
 
         // Creating image element
 
-         showIcon = document.createElement('img');
+            showIcon = document.createElement('img');
 
         // Styling and setting image
 
-        showIcon.setAttribute("src","open.png");
-        showIcon.style.width = "30px";
-        showIcon.style.float = "right";
-        showIcon.style.marginTop = "20px";
-        showIcon.style.marginRight = "40px";
-        if(frontSideBtn == true)
-        {
-            showIcon.id = "frontIcon"+frontArrayLength;
-            showIcon.className = "frontIcon";
-            showHideFront[frontArrayLength] = true;
-            
-        }
-        else
-        {
-            showIcon.id = "backIcon"+backArrayLength;
-            showIcon.className = "backIcon";
-            showHideBack[backArrayLength] = true;
-        }
+            showIcon.setAttribute("src","open.png");
+            showIcon.style.width = "30px";
+            showIcon.style.float = "right";
+            showIcon.style.marginTop = "20px";
+            showIcon.style.marginRight = "40px";
+             if(frontSideBtn == true)
+            {
+                showIcon.id = "frontIcon"+frontArrayLength;
+                showIcon.className = "frontIcon";
+                showHideFront[frontArrayLength] = true;
+                
+            }
+             else
+            {
+                showIcon.id = "backIcon"+backArrayLength;
+                showIcon.className = "backIcon";
+                showHideBack[backArrayLength] = true;
+            }
         
 
         // Listening event on icon
 
-        showIcon.addEventListener('click',changeIcon);
+            showIcon.addEventListener('click',changeIcon);
+
+        
+      
+            divRetriangle.appendChild(showIcon);
+        
+        }
+    }
 
         //Changing icon
         
-
-        
-        divRetriangle.appendChild(showIcon);
-        
-    }
-        }
-        function changeIcon(e)
-        {
-            let getIcon = e.target.id;
-            let idText = getIcon.match(/\d/g).join('');
-            console.log(idText);
-                       
-            showIcon = e.target;
-            if(showIcon.getAttribute('src') == "open.png")
+     function changeIcon(e)
+    {
+        let getIcon = e.target.id;
+        let idText = getIcon.match(/\d/g).join('');
+        console.log(idText);
+        showIcon = e.target;
+             if(showIcon.getAttribute('src') == "open.png")
             {
-                showIcon.setAttribute("src","closed.png");
-                if(frontSideBtn == true)
+                 showIcon.setAttribute("src","closed.png");
+                 if(frontSideBtn == true)
                 {
                     document.getElementById("frontSide"+idText).style.display = "none";
                     showHideFront[idText] = false;
                     console.log(showHideFront[idText]);
                 }
-                else
+                 else
                 {
                     document.getElementById("backSide"+idText).style.display = "none";
                     showHideBack[idText] = false;
                     console.log(showHideBack[idText]);
                 }
-               
             }
-            else
+             else
             {
                 showIcon.setAttribute("src","open.png");
-               if(frontSideBtn == true)
+                if(frontSideBtn == true)
                {
                     document.getElementById("frontSide"+idText).style.display = "initial";
                     showHideFront[idText] = true;
                     console.log(showHideFront[idText]);
                }
-               else
+                else
                {
                     document.getElementById("backSide"+idText).style.display = "initial";
                     showHideBack[idText] = true;
                     console.log(showHideBack[idText]);
                }
-                
-                
             }
-            
             e.preventDefault();
-        }
-        // Listening and getting frontSide Btn
-
+    }
         
-    
-    frontSide.addEventListener('click',changeToFrontSide);
 
-    function changeToFrontSide(e)
+        // Listening and getting frontSide Btn
+    
+     frontSide.addEventListener('click',changeToFrontSide);
+
+     function changeToFrontSide(e)
     {
         document.getElementById('front').style.display = 'inline';
         document.getElementById('back').style.display = 'none';
@@ -295,36 +292,34 @@
         document.getElementById('front-background').style.display = 'inline';
         document.getElementById('front-sideBtn').style.backgroundColor = '#0a1e42';
         document.getElementById('back-sideBtn').style.backgroundColor = '#133879';
-        for(let i = 0 ; i <= frontArrayLength ; i++)
-        {
-            console.log(showHideFront[i]);
-            
+        
+                // Showing frontSide images if they are added and setting their properties
 
-        }
-            if( document.getElementsByClassName("frontSide").length > 0)
+                 if( document.getElementsByClassName("frontSide").length > 0)
                 {
-                    for(let i = 0 ; i <= frontArrayLength ; i++)
+                     for(let i = 0 ; i <= frontArrayLength ; i++)
                     {
                 
                 
-                    if(showHideFront[i] == true)
+                     if(showHideFront[i] == true)
                     {
                         document.getElementById("frontSide"+i).style.display = "flex";
                     }
-                    else
+                     else
                     {
                         document.getElementById("frontSide"+i).style.display = "none";
                     }
                     }
                 }
-                else
+                 else
                 {
                     console.log("false");
                     
                 }
 
+            // Disappearing backSide images 
             
-        for(let i = 0 ; i <= backArrayLength ; i++)
+             for(let i = 0 ; i <= backArrayLength ; i++)
             {
                 
                 if(document.getElementsByClassName('backSide').length > 0)
@@ -338,37 +333,41 @@
                     break;
                 }
             }
-        for(let i = 0 ; i<=frontArrayLength ; i++)
+
+            // Showing frontSide layers and setting their properties
+
+             for(let i = 0 ; i<=frontArrayLength ; i++)
             {
-                
-                if(document.getElementsByClassName("front-index").length > 0)
+                 if(document.getElementsByClassName("front-index").length > 0)
                 {
                     document.getElementById('front-index'+i).style.display = "inherit";
-                    if(showHideFront[i] == true)
+                     if(showHideFront[i] == true)
                     {
                         document.getElementById("frontIcon"+i).setAttribute("src","open.png");
                     }
-                    else
+                     else
                     {
                         document.getElementById("frontIcon"+i).setAttribute("src","closed.png");
                     }
                     
                 }
-                else
+                 else
                 {
                     console.log("false");
                     break;
                 }
             }
-        for(let i = 0 ; i<=backArrayLength ; i++)
+
+            // Disappearing backSide layers
+
+             for(let i = 0 ; i<=backArrayLength ; i++)
             {
                 
-                if(document.getElementsByClassName("back-index").length > 0)
+                 if(document.getElementsByClassName("back-index").length > 0)
                 {
                     document.getElementById("back-index"+i).style.display = "none";
-                    
                 }
-                else
+                 else
                 {
                     showHideBack[i] = null;
                     break;
@@ -376,9 +375,6 @@
             }
         e.preventDefault();
     }
-        // Get button backSide
-
-    
 
     // Listening backSide Btn
 
@@ -386,73 +382,77 @@
 
     function changeToBackSide(e)
     {
-        for(let i = 0 ; i <= backArrayLength ; i++)
-        {
-            
-            console.log(showHideBack[i]);
-
-        }
-
         document.getElementById('front').style.display = 'none';
         document.getElementById('back').style.display = 'inline';
         document.getElementById('back-background').style.display = 'inline';
         document.getElementById('front-background').style.display = 'none';
         document.getElementById('back-sideBtn').style.backgroundColor = '#0a1e42';
         document.getElementById('front-sideBtn').style.backgroundColor = '#133879';
-        for(let i = 0 ; i <= frontArrayLength ; i++)
+            
+            // Disappearing frontSide images
+
+             for(let i = 0 ; i <= frontArrayLength ; i++)
             {
                 
-                if(document.getElementsByClassName("frontSide").length > 0)
+                 if(document.getElementsByClassName("frontSide").length > 0)
                 {
                     document.getElementById("frontSide"+i).style.display = "none";
                 }
-                else
+                 else
                 {
                     
                     console.log("false");
                     break;
                 }
             }
-        for(let i = 0 ; i <= backArrayLength ; i++)
+
+            // Showing backSide images and setting their properties
+
+             for(let i = 0 ; i <= backArrayLength ; i++)
             {
                 
-                if(document.getElementsByClassName("backSide").length > 0)
+                 if(document.getElementsByClassName("backSide").length > 0)
                 {
                     
-                    if(showHideBack[i] == true)
+                     if(showHideBack[i] == true)
                     {
                         document.getElementById("backIcon"+i).setAttribute("src","open.png");
                         document.getElementById("backSide"+i).style.display = "inherit";
                     }
-                    else
+                     else
                     {
                         document.getElementById("backIcon"+i).setAttribute("src","closed.png");
                         document.getElementById("backSide"+i).style.display = "none";
                     }
                 }
-                else
+                 else
                 {
                     showHideBack[i] = null;
                     break;
                 }
             }
-        for(let i = 0 ; i <= frontArrayLength ; i++)
+
+            // Disappearing front layers
+
+             for(let i = 0 ; i <= frontArrayLength ; i++)
             {   
-                
-                if(document.getElementsByClassName('front-index').length > 0)
+                 if(document.getElementsByClassName('front-index').length > 0)
                 {
                     document.getElementById("front-index"+i).style.display = "none";
                 }
-                else
+                 else
                 {
                     console.log("false");
                     break;
                 }
             }
-        for(let i = 0 ; i<=backArrayLength ; i++)
+
+            // Setting layer icon to opened or closed and showing layers
+
+             for(let i = 0 ; i<=backArrayLength ; i++)
             {   
                 
-                if(document.getElementsByClassName("back-index").length > 0)
+                 if(document.getElementsByClassName("back-index").length > 0)
                 {
                     document.getElementById("back-index"+i).style.display = "inherit";
                     if(showHideBack[i] == true)
@@ -464,9 +464,8 @@
                         document.getElementById("backIcon"+i).setAttribute("src","closed.png");
                     }
                 }
-                else
+                 else
                 {
-                    
                     break;
                 }
             }
