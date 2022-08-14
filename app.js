@@ -111,6 +111,7 @@
             }
             addImage.id = "frontSide"+frontArrayLength;
             addImage.className = "frontSide";
+            
         }
          else
         {
@@ -125,20 +126,18 @@
             }
             addImage.id = "backSide"+backArrayLength;
             addImage.className = "backSide";
+            
         }
-    
+        addImage.setAttribute("draggable","true");
         addImage.style.zIndex = parseInt(4+arrayLength);
     
         reader.onload = () =>
         { 
+        
         // Placing image on t-shirt
         
             addImage.setAttribute("src",reader.result);
             document.getElementById('frontSide-logo').appendChild(addImage);
-
-        // Assignment files holder to a variable
-
-            const holder = document.getElementById('files-holder');
 
         // Creating div and styling 
 
@@ -157,6 +156,16 @@
             divRetriangle.style.width = 'auto';
             divRetriangle.style.borderBottom = 'solid black 1px';
             holder.appendChild(divRetriangle);
+
+            // miniImage holder
+
+            let miniImageHolder = document.createElement('div');
+            miniImageHolder.className = "image-holder"
+            miniImageHolder.style.float = "left";
+            miniImageHolder.style.borderRight = "solid black 1px";
+            miniImageHolder.style.height = "70px";
+            miniImageHolder.style.width = "80px";
+            divRetriangle.appendChild(miniImageHolder);
         
         // Creating image element
 
@@ -166,14 +175,8 @@
 
             miniImage.setAttribute("src",reader.result);
 
-        // Styling image variable
 
-            miniImage.style.marginLeft = "10px";
-            miniImage.style.marginTop = "5px";
-            miniImage.style.maxHeight = "60px";
-            miniImage.style.maxWidth = "60px";
-            miniImage.style.justifyContent = "center";
-            divRetriangle.appendChild(miniImage);
+            miniImageHolder.appendChild(miniImage);
 
         // Creating file name element
 
@@ -182,18 +185,6 @@
         //  Assigment name of file to variable to show on website      
 
             text.innerHTML = realBtn.files[0].name;
-
-        // Styling name of file
-
-            text.style.color = "black";
-            text.style.position = "absolute";
-            text.style.marginTop = "25px";
-            text.style.width = "200px";
-            text.style.marginLeft = "10px";
-            text.style.height = "30px";
-            text.style.textAlign = "center";
-            text.style.fontFamily = "Arial";
-            text.style.overflow = "hidden";
 
         // Selecting div to put element into div
 
@@ -472,23 +463,38 @@
         e.preventDefault();
     }
      // Moving image to indicated place
+     let images;
+     let selectImage;
+        if(frontSideBtn == true)
+        {
+             if(document.getElementsByClassName("frontSide").length > 0)
+            {
+                images = document.querySelector('.frontSide');
+                images.addEventListener('dragstart',dragStart);
+            }
+             else
+            {
+                console.log("false");
+            }
+        }
+         else
+        {
+            if(document.getElementsByClassName("backSide").length > 0)
+            {
+                images = document.querySelector('.backSide');
+            }
+             else
+            {
+                console.log("false");
+            }
+        }
         
-        // let imageSelect = document.querySelector('#frontSide-logo');
-        
-        //  imageSelect.addEventListener('click',selectElement);
-        //  function selectElement(e)
-        //     {
-        //         let imageClick = e.target.id;
-        //         imageClick.addEventListener('mousemove',moveElement)
-        //         function moveElement(e)
-        //         {
-        //             let x = e.clientX;
-        //             let y = e.clientY;
-        //             imageClick.style.left = x + "px";
-        //             imageClick.style.top = y + "px";
-        //             e.preventDefault();
-        //         }
-        //      e.preventDefault();
-        //      }
-        
+         function dragStart()
+        {
+            console.log("drag");
+            this.className += 'hold';
+            setTimeout(() => this.className = 'invisible') ;
+            
+        }
+       
         

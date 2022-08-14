@@ -5,8 +5,7 @@ body{
     font-family: Montserrat medium;
     
 }
-#header-top
-{
+#header-top{
     height: 60px;
     background-color: #071225;   
     color: white;
@@ -17,16 +16,14 @@ body{
 
 /* Styling items on main page */
 
-.merch 
-{
+.merch {
     width: 200px;
     border: solid rgb(71, 71, 71) 1px;
     margin-left: 150px;
     margin-top: 40px;
     
 }
-.image
-{
+.image{
     margin-left: -40px;
 
 }
@@ -44,9 +41,7 @@ body{
 
 /* Styling Button class */
 
-.Button
-{
-    
+.Button{
     color: white;
     font-size: 110%;
     border: none;
@@ -56,22 +51,17 @@ body{
     border-right: #1b305a solid;
     background-color: #133879;
 }
-.Button:hover
-{
+.Button:hover{
     background-color: #0a1e42 !important;
 }
 
-#create
-{
-    
+#create{
     margin-left: 148px;
-    
 }
 
 /* Styling modal window */
 
-#modal
-{
+#modal{
     display: none;
     position: fixed;
     background-color: rgba(0, 0, 0, 0.5);
@@ -83,8 +73,7 @@ body{
     overflow: scroll;
     
 }
-#modal-creator
-{
+#modal-creator{
     background-color: white;
     margin: 10%;
     padding: 20px;
@@ -93,47 +82,39 @@ body{
     
     
 }
- #left-side, #middle, #files-holder
-{
+#left-side, #middle, #files-holder{
     float: left;
 }
 
-#middle
-{
+#middle{
     height: 440px;
     width: 300px;
 }
 
 /* Modal bar elements styling */
 
-#front-sideBtn
-{
+#front-sideBtn{
     background-color: #0a1e42;
    
 }
-#saveBtn
-{
+#saveBtn{
     margin-left: 440px;
 }
-#closeBtn
-{
+#closeBtn{
     float: right;
     font-size: 30px;
     top: 0;
     color: #155adb;
 }
-#closeBtn:hover, #closeBtn:focus
-{
+#closeBtn:hover, #closeBtn:focus{
     color:#000000 ;
 }
 
-input[type=file]
-{
+input[type=file]{
     display: none;
 }
 
-#file
-{
+#file{
     
     margin-top: 12px;
     margin-left: 50px;
@@ -143,15 +124,13 @@ input[type=file]
 
 
 
-#left-side
-{
+#left-side{
     width: 410px;
     height: 410px;
     margin-top: 10px;
     
 }
-#left-side .background
-{
+#left-side .background{
     margin-top: 10px;
     border: rgba(0, 0, 0, 0.5) solid 1px;
     width: 408px;  
@@ -159,8 +138,7 @@ input[type=file]
     mix-blend-mode: multiply;
     
 }
-.frontSide, .backSide
-{
+.frontSide, .backSide{
     position: absolute;
     max-height: 250px;
     margin-top: 110px;
@@ -169,33 +147,21 @@ input[type=file]
     overflow: hidden;
     z-index: 4;
 }
-/* .chosen-frontSide-image
-{
-    width: 135px;
-}
-.chosen-backSide-image
-{
-    width: 135px;
-    display: none;
-} */
-#front
-{
+
+#front{
     position: absolute;
 }
-#back
-{
+#back{
     display: none;
     position: absolute;
 }
-#back-background
-{
+#back-background{
     display: none;
 }
 
 /* middle element styling */
 
-#pallet
-{
+#pallet{
     width: 205px;
     height: 300px;
     position: relative;
@@ -204,8 +170,7 @@ input[type=file]
     border: none;
 }
 
-#hexa-color
-{
+#hexa-color{
     width: 190px;
     font-size: 20px;
     margin-left: 50px;
@@ -214,8 +179,7 @@ input[type=file]
 
 /* Right side/Files-holder styling */
 
-#files-holder
-{
+#files-holder{
     border: #040913 solid 1px; 
     width: 350px;
     height: 410px;
@@ -223,7 +187,32 @@ input[type=file]
     margin-right: 10px;
     overflow: scroll;
 }
-
+.image-holder img{
+    display: block;
+    position: relative;
+    max-width: 80%;
+    max-height: 80%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    
+    
+    
+}
+.front-index span{
+    color: black;
+    width: 140px;
+    margin-left: 20px;
+    height: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
+    margin-top: 25px;
+    display: inline-block;
+    text-align: center;
+   
+    
+}
 
 
 
