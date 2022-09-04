@@ -25,7 +25,7 @@ body{
 }
 .image{
     margin-left: -40px;
-
+    
 }
 .merch .zoom-in figure img {
 	transform: scale(1);
@@ -128,6 +128,7 @@ input[type=file]{
     width: 410px;
     height: 410px;
     margin-top: 10px;
+    position: relative;
     
 }
 #left-side .background{
@@ -135,9 +136,27 @@ input[type=file]{
     border: rgba(0, 0, 0, 0.5) solid 1px;
     width: 408px;  
     margin-left: 0px;
-    mix-blend-mode: multiply;
+    mix-blend-mode: multiply;  
+    
     
 }
+#drawingArea{
+    
+    width: 410px;
+    height: 410px;
+    position: absolute;
+    z-index: 1000;
+    
+}
+.myCanvas, .upper-canvas {
+    margin-top: 120px;
+    width: 100px;
+    height: 200px;
+    margin-left: 130px;
+    
+}
+
+
 .frontSide, .backSide{
     position: absolute;
     max-height: 250px;
@@ -146,6 +165,7 @@ input[type=file]{
     max-width: 135px;
     overflow: hidden;
     z-index: 4;
+    
 }
 
 #front{
@@ -200,7 +220,7 @@ input[type=file]{
     
     
 }
-.front-index span{
+.front-index span, .back-index span{
     color: black;
     width: 140px;
     margin-left: 20px;

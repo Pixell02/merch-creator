@@ -1,3 +1,4 @@
+    
     // Get modal element
     let modal = document.getElementById('modal');
     // Get open button
@@ -7,52 +8,45 @@
     // Opening modal window
     openBtn.addEventListener('click', openModal);
 
-    function openModal(e)
-    {
+    function openModal(e){
         modal.style.display = "flex";
         e.preventDefault();
     }
     // Closing modal window
     closeBtn.addEventListener('click', closeModal);
 
-    function closeModal(e)
-    {
+    function closeModal(e){
         modal.style.display = "none";
         e.preventDefault();
     }
 
     // Get color from input
     
-    const pickerColor = document.getElementById('pallet');
-    const backColor = document.getElementById('back-background');
-    const frontColor = document.getElementById('front-background');
-    pickerColor.addEventListener('input',colorValue);
-    function colorValue(e)
-    {
-        backColor.style.backgroundColor = pickerColor.value;
-        frontColor.style.backgroundColor = pickerColor.value;
-        e.preventDefault();
-    }
-
+     let pickerColor = document.getElementById('pallet');
+     const backColor = document.getElementById('back-background');
+     const frontColor = document.getElementById('front-background');
+     let inputColor = document.getElementById('hexa-color');
     
     //Getting color value from input
     
-    const inputColor = document.getElementById('hexa-color');
-
+    pickerColor.addEventListener('input',colorValue);
+     function colorValue(e){
+         backColor.style.backgroundColor = pickerColor.value;
+         frontColor.style.backgroundColor = pickerColor.value;
+         inputColor.value = pickerColor.value;
+         e.preventDefault();
+     }
+    
+        
     inputColor.addEventListener('input',inputValue);
 
-    function inputValue(e)
-    {
-        backColor.style.backgroundColor = "#"+inputColor.value;
-        frontColor.style.backgroundColor = "#"+inputColor.value;
+    function inputValue(e){
+        frontColor.style.backgroundColor = inputColor.value;
+        backColor.style.backgroundColor = inputColor.value;
+        
+        pickerColor.value = inputColor.value;
         e.preventDefault();
     }
-
-    let addImage;
-    let showIcon;
-    let showHideFront = [];
-    let showHideBack = [];
-    
 
     // Getting Upload Btn by click edited Btn
     
@@ -65,103 +59,125 @@
 
     upload.addEventListener('click',uploadFile);
 
-    function uploadFile(e)
-    {
+    function uploadFile(e){
         realBtn.click();
         e.preventDefault();
     }
+
+    
+    
+   
+        
+    
+    const frontCanvas = new fabric.Canvas('frontCanvas');
+    const backCanvas = new fabric.Canvas('backCanvas');
+    document.getElementsByClassName("canvas-container")[0].style.position = "absolute";
+    document.getElementsByClassName("canvas-container")[0].style.zIndex = "101";
+    document.getElementsByClassName("canvas-container")[1].style.position = "absolute";
+    document.getElementsByClassName("canvas-container")[0].style.zIndex = "100";
     let frontSide = document.getElementById('front-sideBtn');
     let backSide = document.getElementById('back-sideBtn');
     let frontSideBtn = true;
     let arrayLength;
     let frontArrayLength;
     let backArrayLength;
+    let i;
+    let addImage;
+    let showIcon;
+    let showHideFront = [];
+    let showHideBack = [];
+    let frontIconIndex;
+    let backIconIndex;
+    let createBin;
+    let divRetriangle;
     frontSide.addEventListener('click', btnValue)
-    function btnValue(e)
-    {
-        frontSideBtn=true;
+    function btnValue(e){
+        frontSideBtn = true;
         e.preventDefault();
     }
     backSide.addEventListener('click', backBtnValue)
-    function backBtnValue(e)
-    {
-        frontSideBtn=false;
+    function backBtnValue(e){
+        frontSideBtn = false;
         e.preventDefault();
     }
     // Uploading image file and creating object
     
-    realBtn.onchange = () => 
-    {
+    realBtn.onchange = () => {
         let reader = new FileReader();
         arrayLength = realBtn.files.length-1;
         reader.readAsDataURL(realBtn.files[arrayLength]);
-        addImage = document.createElement('img');
-    
-    
-         if(frontSideBtn == true)
-        {
-             if(document.getElementsByClassName('frontSide').length > 0)
-            {
-                frontArrayLength = document.getElementsByClassName('frontSide').length;
-                addImage.style.zIndex = parseInt(4+frontArrayLength);
-            }
-             else
-            {
-                frontArrayLength = 0;
-            }
-            addImage.id = "frontSide"+frontArrayLength;
-            addImage.className = "frontSide";
-            
-        }
-         else
-        {
-             if(document.getElementsByClassName('backSide').length > 0)
-            {
-                backArrayLength = document.getElementsByClassName('backSide').length;
-                addImage.style.zIndex = parseInt(4+backArrayLength);
-            }
-             else
-            {
-                backArrayLength = 0;
-            }
-            addImage.id = "backSide"+backArrayLength;
-            addImage.className = "backSide";
-            
-        }
-        addImage.setAttribute("draggable","true");
-        addImage.style.zIndex = parseInt(4+arrayLength);
-    
-        reader.onload = () =>
-        { 
-        
-        // Placing image on t-shirt
-        
-            addImage.setAttribute("src",reader.result);
-            document.getElementById('frontSide-logo').appendChild(addImage);
+         // Creating div and styling 
 
-        // Creating div and styling 
-
-            let divRetriangle = document.createElement('div');
-            if(frontSideBtn == true)
-             {
-                divRetriangle.id = "front-index"+frontArrayLength;
+            divRetriangle = document.createElement('div');
+            if(frontSideBtn == true){
+                
                 divRetriangle.className = "front-index";
+                frontIconIndex = document.getElementsByClassName("front-index").length;
+                console.log(frontIconIndex);
+                divRetriangle.id = "front-index"+frontIconIndex;
             }
-             else
-            {
-                divRetriangle.id = "back-index"+backArrayLength; 
+             else{
+                
                 divRetriangle.className = "back-index";
+                backIconIndex = document.getElementsByClassName("back-index").length;
+                console.log(backIconIndex);
+                divRetriangle.id = "back-index"+backIconIndex; 
             }
             divRetriangle.style.height = '70px';
-            divRetriangle.style.width = 'auto';
+            divRetriangle.style.width = '330px';
             divRetriangle.style.borderBottom = 'solid black 1px';
+            divRetriangle.style.float = "left";
             holder.appendChild(divRetriangle);
 
-            // miniImage holder
+            
+        addImage = document.createElement('img');
+        
+        
+         if(frontSideBtn == true){
+             
+                addImage.style.zIndex = parseInt(4+frontIconIndex);
+             
+            
+            addImage.className = "frontSide front-canvas-img"; 
+            addImage.id = "frontSide"+frontIconIndex; 
+         } else {
+             
+                addImage.style.zIndex = parseInt(4+backArrayLength);
+            
+            addImage.id = "backSide"+backArrayLength;
+            addImage.className = "backSide back-canvas-img";
+        }
+        
+        addImage.style.zIndex = parseInt(10+arrayLength);
+        addImage.style.display = "inherit";
+        reader.onload = (e) => { 
+        let imgObj = new Image();
+        imgObj.src = e.target.result;
+        
+        imgObj.onload = function(){
+            let newImg = new fabric.Image(imgObj);
+            newImg.scaleToHeight(150);
+            newImg.scaleToWidth(150); 
+            newImg.visible = true;
+            if(frontSideBtn == true){
+                frontCanvas.centerObject(newImg);
+                frontCanvas.add(newImg);
+                frontCanvas.renderAll();
+            } else{
+                backCanvas.centerObject(newImg);
+                backCanvas.add(newImg);
+                backCanvas.renderAll();
+            }
+        }
+       
+       
+
+        // miniImage holder
 
             let miniImageHolder = document.createElement('div');
             miniImageHolder.className = "image-holder"
             miniImageHolder.style.float = "left";
+            miniImageHolder.style.display = "inline-block";
             miniImageHolder.style.borderRight = "solid black 1px";
             miniImageHolder.style.height = "70px";
             miniImageHolder.style.width = "80px";
@@ -174,8 +190,7 @@
         // Assigment loaded image to variable
 
             miniImage.setAttribute("src",reader.result);
-
-
+            miniImage.style.float = "left";
             miniImageHolder.appendChild(miniImage);
 
         // Creating file name element
@@ -185,7 +200,8 @@
         //  Assigment name of file to variable to show on website      
 
             text.innerHTML = realBtn.files[0].name;
-
+             text.style.float = "left";
+            text.style.display = "inline-block";
         // Selecting div to put element into div
 
             divRetriangle.appendChild(text);
@@ -195,22 +211,25 @@
             showIcon = document.createElement('img');
 
         // Styling and setting image
+            let rightSideHolder = document.createElement("div");
+            rightSideHolder.style.width = "85px";
+            // rightSideHolder.style.display = "inline";
+            rightSideHolder.style.float = "left";
+            divRetriangle.appendChild(rightSideHolder);
 
             showIcon.setAttribute("src","open.png");
-            showIcon.style.width = "30px";
-            showIcon.style.float = "right";
+            showIcon.style.width = "25px";
+            showIcon.style.float = "left";
+            showIcon.style.display = "inline";
             showIcon.style.marginTop = "20px";
-            showIcon.style.marginRight = "40px";
-             if(frontSideBtn == true)
-            {
-                showIcon.id = "frontIcon"+frontArrayLength;
+            showIcon.style.marginLeft = "10px";
+             if(frontSideBtn == true){
+                showIcon.id = "frontIcon"+frontIconIndex;
                 showIcon.className = "frontIcon";
-                showHideFront[frontArrayLength] = true;
-                
+                showHideFront[frontIconIndex] = true;  
             }
-             else
-            {
-                showIcon.id = "backIcon"+backArrayLength;
+             else{
+                showIcon.id = "backIcon"+backIconIndex;
                 showIcon.className = "backIcon";
                 showHideBack[backArrayLength] = true;
             }
@@ -219,64 +238,118 @@
         // Listening event on icon
 
             showIcon.addEventListener('click',changeIcon);
+            rightSideHolder.appendChild(showIcon);
 
-        
-      
-            divRetriangle.appendChild(showIcon);
-        
+            
+            createBin = document.createElement("img");
+            createBin.setAttribute("src","bin.png");
+            createBin.style.width = "25px";
+            createBin.style.float = "left";
+            createBin.style.marginTop = "20px";
+            createBin.style.display = "block";
+            createBin.style.marginLeft = "15px";
+            if(frontSideBtn == true){
+                createBin.id = "front-bin"+frontIconIndex;
+                createBin.className = "frontBin";    
+            } else {createBin.id = "back-bin"+backIconIndex;
+            createBin.className = "backBin";   
+            }
+            
+            createBin.addEventListener("click",deleteElement);
+            rightSideHolder.appendChild(createBin);
+            
         }
     }
+        //Deleting element
+        
+
+        function deleteElement(e){
+            
+            if(frontSideBtn == true){
+            let getElement = e.target.id;
+            console.log(getElement);
+            let idText = getElement.match(/\d/g).join('');
+            console.log(idText);
+                console.log(frontCanvas.item(idText));
+                frontCanvas.remove(frontCanvas.item(idText));
+                frontCanvas.renderAll();
+                
+                document.getElementById("front-index"+idText).remove();
+                
+                let binElements = document.querySelectorAll(".front-index");
+                console.log(binElements);
+                binElements.forEach( (e,i) => {
+                    console.log(i);
+                    createBin.id = "front-bin"+i;
+                    showIcon.id = "frontIcon"+i;
+                    e.id = "front-index"+i;
+                });
+            } else {
+                let getElement = e.target.id;
+                console.log(getElement);
+                let idText = getElement.match(/\d/g).join('');
+                console.log(idText);
+                console.log(backCanvas.item(idText));
+                backCanvas.remove(backCanvas.item(idText));
+                backCanvas.renderAll();
+                document.getElementById("back-index"+idText).remove();
+                let binElements = document.querySelectorAll(".back-index");
+                console.log(binElements);
+                binElements.forEach( (e,i) => {
+                    createBin.id = "back-bin"+i;
+                    showIcon.id = "backIcon"+i;
+                    e.id = "back-index"+i;
+                });
+            }
+            e.preventDefault();
+        }
 
         //Changing icon
         
-     function changeIcon(e)
-    {
+     function changeIcon(e){
         let getIcon = e.target.id;
         let idText = getIcon.match(/\d/g).join('');
         console.log(idText);
         showIcon = e.target;
-             if(showIcon.getAttribute('src') == "open.png")
-            {
+             if(showIcon.getAttribute('src') == "open.png"){
                  showIcon.setAttribute("src","closed.png");
-                 if(frontSideBtn == true)
-                {
-                    document.getElementById("frontSide"+idText).style.display = "none";
+                 if(frontSideBtn == true){
+                    frontCanvas.item(idText).visible = false;
+                    frontCanvas.renderAll();
                     showHideFront[idText] = false;
                     console.log(showHideFront[idText]);
-                }
-                 else
-                {
-                    document.getElementById("backSide"+idText).style.display = "none";
+                 }
+                 else{
+                    backCanvas.item(idText).visible = false;
+                    backCanvas.renderAll();
                     showHideBack[idText] = false;
                     console.log(showHideBack[idText]);
-                }
-            }
-             else
-            {
+                 }
+             } else {
                 showIcon.setAttribute("src","open.png");
-                if(frontSideBtn == true)
-               {
-                    document.getElementById("frontSide"+idText).style.display = "initial";
+                if(frontSideBtn == true){
+                    frontCanvas.item(idText).visible = true;
+                    frontCanvas.renderAll();
                     showHideFront[idText] = true;
                     console.log(showHideFront[idText]);
-               }
-                else
-               {
-                    document.getElementById("backSide"+idText).style.display = "initial";
+               } else{
+                backCanvas.item(idText).visible = true;
+                backCanvas.renderAll();
                     showHideBack[idText] = true;
                     console.log(showHideBack[idText]);
-               }
-            }
-            e.preventDefault();
-    }
+                 }
+                }
+        e.preventDefault();
+     }
         
 
         // Listening and getting frontSide Btn
     
-     frontSide.addEventListener('click',changeToFrontSide);
-
-     function changeToFrontSide(e)
-    {
+    frontSide.addEventListener('click',changeToFrontSide);
+    
+    function changeToFrontSide(e){
+        document.getElementsByClassName("canvas-container")[0].style.zIndex = "101";
+        document.getElementsByClassName("canvas-container")[1].style.zIndex = "100";
         document.getElementById('front').style.display = 'inline';
         document.getElementById('back').style.display = 'none';
         document.getElementById('back-background').style.display = 'none';
@@ -285,85 +358,63 @@
         document.getElementById('back-sideBtn').style.backgroundColor = '#133879';
         
                 // Showing frontSide images if they are added and setting their properties
-
-                 if( document.getElementsByClassName("frontSide").length > 0)
-                {
-                     for(let i = 0 ; i <= frontArrayLength ; i++)
-                    {
-                
-                
-                     if(showHideFront[i] == true)
-                    {
+                    document.getElementById("frontCanvas").style.display = "initial";
+                    document.getElementById("backCanvas").style.display = "none";
+                let frontElements = document.querySelectorAll(".frontSide");
+                if(frontElements.length > 0){
+                    console.log(frontElements);
+                    frontElements.forEach((e,i) => {
+                        if(showHideFront[i] == true){
                         document.getElementById("frontSide"+i).style.display = "flex";
-                    }
-                     else
-                    {
+                        console.log ("flex");
+                        } else {
                         document.getElementById("frontSide"+i).style.display = "none";
-                    }
-                    }
-                }
-                 else
-                {
+                        console.log ("none");
+                        }
+                    });
+                } else {
                     console.log("false");
-                    
-                }
+                 }
 
             // Disappearing backSide images 
-            
-             for(let i = 0 ; i <= backArrayLength ; i++)
-            {
-                
-                if(document.getElementsByClassName('backSide').length > 0)
-                {
-                    document.getElementById("backSide"+i).style.display = "none";
+            let backElements = document.querySelectorAll(".backSide");
+             backElements.forEach((e,i) => {
+                if(document.getElementsByClassName('backSide').length > 0){
+                    document.getElementById("backSide"+i).style.display = "none";  
                     
-                }
-                else
-                {
+                } else {
                     console.log("false");
-                    break;
                 }
-            }
+             });
 
             // Showing frontSide layers and setting their properties
 
-             for(let i = 0 ; i<=frontArrayLength ; i++)
-            {
-                 if(document.getElementsByClassName("front-index").length > 0)
-                {
+                let frontHolder = document.querySelectorAll(".front-index")
+                frontHolder.forEach((e,i) => {
+                 if(document.getElementsByClassName("front-index").length > 0) {
                     document.getElementById('front-index'+i).style.display = "inherit";
-                     if(showHideFront[i] == true)
-                    {
+                     if(showHideFront[i] == true) {
                         document.getElementById("frontIcon"+i).setAttribute("src","open.png");
-                    }
-                     else
-                    {
+                     } else {
                         document.getElementById("frontIcon"+i).setAttribute("src","closed.png");
-                    }
-                    
-                }
-                 else
-                {
+                    }   
+                 } else {
                     console.log("false");
-                    break;
-                }
-            }
+                 }
+             });
 
             // Disappearing backSide layers
 
-             for(let i = 0 ; i<=backArrayLength ; i++)
-            {
-                
-                 if(document.getElementsByClassName("back-index").length > 0)
-                {
+             let backHolder = document.querySelectorAll(".back-index");
+             
+             backHolder.forEach((e,i) =>{
+                 if(document.getElementsByClassName("back-index").length > 0){
                     document.getElementById("back-index"+i).style.display = "none";
-                }
-                 else
-                {
-                    showHideBack[i] = null;
-                    break;
-                }
-            }
+                    
+                 } else {
+                    showHideBack[i] = null;   
+                 }
+            });
         e.preventDefault();
     }
 
@@ -373,6 +424,8 @@
 
     function changeToBackSide(e)
     {
+        document.getElementsByClassName("canvas-container")[0].style.zIndex = "100";
+        document.getElementsByClassName("canvas-container")[1].style.zIndex = "101";
         document.getElementById('front').style.display = 'none';
         document.getElementById('back').style.display = 'inline';
         document.getElementById('back-background').style.display = 'inline';
@@ -381,120 +434,74 @@
         document.getElementById('front-sideBtn').style.backgroundColor = '#133879';
             
             // Disappearing frontSide images
-
-             for(let i = 0 ; i <= frontArrayLength ; i++)
-            {
-                
-                 if(document.getElementsByClassName("frontSide").length > 0)
-                {
-                    document.getElementById("frontSide"+i).style.display = "none";
-                }
-                 else
-                {
-                    
-                    console.log("false");
-                    break;
-                }
-            }
+            document.getElementById("frontCanvas").style.display = "none";
+            document.getElementById("backCanvas").style.display = "initial";
+            
 
             // Showing backSide images and setting their properties
-
-             for(let i = 0 ; i <= backArrayLength ; i++)
-            {
+                let backElements = document.querySelectorAll(".backSide");
                 
                  if(document.getElementsByClassName("backSide").length > 0)
                 {
-                    
-                     if(showHideBack[i] == true)
-                    {
+                    backElements.forEach((e,i) => {
+                     if(showHideBack[i] == true){
                         document.getElementById("backIcon"+i).setAttribute("src","open.png");
                         document.getElementById("backSide"+i).style.display = "inherit";
-                    }
-                     else
-                    {
+                    } else {
                         document.getElementById("backIcon"+i).setAttribute("src","closed.png");
                         document.getElementById("backSide"+i).style.display = "none";
                     }
-                }
-                 else
-                {
+                    
+                });
+                } else {
                     showHideBack[i] = null;
-                    break;
                 }
-            }
+            
 
             // Disappearing front layers
-
-             for(let i = 0 ; i <= frontArrayLength ; i++)
-            {   
-                 if(document.getElementsByClassName('front-index').length > 0)
-                {
+            let frontHolder = document.querySelectorAll(".front-index");
+            
+             frontHolder.forEach((e,i) => {   
+                 if(document.getElementsByClassName('front-index').length > 0){
                     document.getElementById("front-index"+i).style.display = "none";
-                }
-                 else
-                {
+                    
+                 } else {
                     console.log("false");
-                    break;
-                }
-            }
-
+                  }
+                
+             });
+            
             // Setting layer icon to opened or closed and showing layers
 
-             for(let i = 0 ; i<=backArrayLength ; i++)
-            {   
-                
-                 if(document.getElementsByClassName("back-index").length > 0)
-                {
+                 if(document.getElementsByClassName("back-index").length > 0){
+                    let backHolder = document.querySelectorAll(".back-index");
+                        
+                    backHolder.forEach((e,i) => {
+                        console.log(i);
                     document.getElementById("back-index"+i).style.display = "inherit";
-                    if(showHideBack[i] == true)
-                    {
+                    if(showHideBack[i] == true){
                         document.getElementById("backIcon"+i).setAttribute("src","open.png");
-                    }
-                    else
-                    {
+                    } else {
                         document.getElementById("backIcon"+i).setAttribute("src","closed.png");
-                    }
-                }
-                 else
-                {
-                    break;
-                }
-            }
+                      }
+                      
+                    });
+                 } else {
+                   console.log ("false"); 
+                  }
+            
         e.preventDefault();
     }
-     // Moving image to indicated place
-     let images;
-     let selectImage;
-        if(frontSideBtn == true)
-        {
-             if(document.getElementsByClassName("frontSide").length > 0)
-            {
-                images = document.querySelector('.frontSide');
-                images.addEventListener('dragstart',dragStart);
-            }
-             else
-            {
-                console.log("false");
-            }
-        }
-         else
-        {
-            if(document.getElementsByClassName("backSide").length > 0)
-            {
-                images = document.querySelector('.backSide');
-            }
-             else
-            {
-                console.log("false");
-            }
-        }
-        
-         function dragStart()
-        {
-            console.log("drag");
-            this.className += 'hold';
-            setTimeout(() => this.className = 'invisible') ;
-            
-        }
-       
-        
+    // Downloading image
+    const saveBtn = document.getElementById("saveBtn");
+    
+    // Creating downloadable image
+    saveBtn.addEventListener('click', function(){
+    
+domtoimage.toBlob(document.getElementById('left-side'))
+    .then(function (blob) {
+        window.saveAs(blob, 'my-node.png');
+    });
+     });
+
+ 
