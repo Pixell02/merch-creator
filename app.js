@@ -80,7 +80,7 @@
     let frontSideBtn = true;
     let arrayLength;
     let frontArrayLength;
-    let backArrayLength;
+    
     let i;
     let addImage;
     let showIcon;
@@ -115,6 +115,7 @@
                 frontIconIndex = document.getElementsByClassName("front-index").length;
                 console.log(frontIconIndex);
                 divRetriangle.id = "front-index"+frontIconIndex;
+                
             }
              else{
                 
@@ -122,6 +123,7 @@
                 backIconIndex = document.getElementsByClassName("back-index").length;
                 console.log(backIconIndex);
                 divRetriangle.id = "back-index"+backIconIndex; 
+                
             }
             divRetriangle.style.height = '70px';
             divRetriangle.style.width = '330px';
@@ -134,17 +136,17 @@
         
         
          if(frontSideBtn == true){
-             
+                
                 addImage.style.zIndex = parseInt(4+frontIconIndex);
              
             
             addImage.className = "frontSide front-canvas-img"; 
             addImage.id = "frontSide"+frontIconIndex; 
          } else {
-             
-                addImage.style.zIndex = parseInt(4+backArrayLength);
+                
+                addImage.style.zIndex = parseInt(4+backIconIndex);
             
-            addImage.id = "backSide"+backArrayLength;
+            addImage.id = "backSide"+backIconIndex;
             addImage.className = "backSide back-canvas-img";
         }
         
@@ -231,7 +233,7 @@
              else{
                 showIcon.id = "backIcon"+backIconIndex;
                 showIcon.className = "backIcon";
-                showHideBack[backArrayLength] = true;
+                showHideBack[backIconIndex] = true;
             }
         
 
@@ -270,7 +272,7 @@
             console.log(getElement);
             let idText = getElement.match(/\d/g).join('');
             console.log(idText);
-                console.log(frontCanvas.item(idText));
+            let getId;
                 frontCanvas.remove(frontCanvas.item(idText));
                 frontCanvas.renderAll();
                 
@@ -278,12 +280,17 @@
                 
                 let binElements = document.querySelectorAll(".front-index");
                 console.log(binElements);
+                console.log(createBin);
                 binElements.forEach( (e,i) => {
                     console.log(i);
-                    createBin.id = "front-bin"+i;
-                    showIcon.id = "frontIcon"+i;
                     e.id = "front-index"+i;
+                    console.log(e.id);
+                    document.getElementsByClassName("frontBin")[i].id = "front-bin"+ i;
+                    console.log(createBin.id);
+                    document.getElementsByClassName("frontIcon")[i].id = "frontIcon"+ i;
+                    console.log(showIcon.id);
                 });
+                
             } else {
                 let getElement = e.target.id;
                 console.log(getElement);
@@ -296,14 +303,14 @@
                 let binElements = document.querySelectorAll(".back-index");
                 console.log(binElements);
                 binElements.forEach( (e,i) => {
-                    createBin.id = "back-bin"+i;
-                    showIcon.id = "backIcon"+i;
+                    document.getElementsByClassName("backBin")[i].id = "back-bin"+i;
+                    document.getElementsByClassName("backIcon")[i].id = "backIcon"+i;
                     e.id = "back-index"+i;
                 });
             }
             e.preventDefault();
         }
-
+        
         //Changing icon
         
      function changeIcon(e){
@@ -361,7 +368,7 @@
                     document.getElementById("frontCanvas").style.display = "initial";
                     document.getElementById("backCanvas").style.display = "none";
                 let frontElements = document.querySelectorAll(".frontSide");
-                if(frontElements.length > 0){
+                
                     console.log(frontElements);
                     frontElements.forEach((e,i) => {
                         if(showHideFront[i] == true){
@@ -372,9 +379,7 @@
                         console.log ("none");
                         }
                     });
-                } else {
-                    console.log("false");
-                 }
+                
 
             // Disappearing backSide images 
             let backElements = document.querySelectorAll(".backSide");
@@ -441,8 +446,7 @@
             // Showing backSide images and setting their properties
                 let backElements = document.querySelectorAll(".backSide");
                 
-                 if(document.getElementsByClassName("backSide").length > 0)
-                {
+                 
                     backElements.forEach((e,i) => {
                      if(showHideBack[i] == true){
                         document.getElementById("backIcon"+i).setAttribute("src","open.png");
@@ -453,10 +457,7 @@
                     }
                     
                 });
-                } else {
-                    showHideBack[i] = null;
-                }
-            
+              
 
             // Disappearing front layers
             let frontHolder = document.querySelectorAll(".front-index");
@@ -473,7 +474,7 @@
             
             // Setting layer icon to opened or closed and showing layers
 
-                 if(document.getElementsByClassName("back-index").length > 0){
+                 
                     let backHolder = document.querySelectorAll(".back-index");
                         
                     backHolder.forEach((e,i) => {
@@ -481,14 +482,14 @@
                     document.getElementById("back-index"+i).style.display = "inherit";
                     if(showHideBack[i] == true){
                         document.getElementById("backIcon"+i).setAttribute("src","open.png");
+                        console.log("tylnia ikona "+i+" jest widoczna");
                     } else {
                         document.getElementById("backIcon"+i).setAttribute("src","closed.png");
+                        console.log ("tylnia ikona "+i+" jest niewidoczna");
                       }
                       
                     });
-                 } else {
-                   console.log ("false"); 
-                  }
+                 
             
         e.preventDefault();
     }
