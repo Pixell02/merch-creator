@@ -2,13 +2,16 @@
     // Get modal element
     let modal = document.getElementById('modal');
     // Get open button
-    let openBtn = document.getElementById('create');
+    let openBtn = document.querySelector('.item-button');
+    console.log(openBtn);
     // Closing button
     let closeBtn = document.getElementById('closeBtn');
     // Opening modal window
     openBtn.addEventListener('click', openModal);
 
     function openModal(e){
+        let imgId = e.target.id;
+        console.log(imgId);
         modal.style.display = "flex";
         e.preventDefault();
     }
