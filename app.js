@@ -64,11 +64,8 @@
         e.preventDefault();
     }
 
-    
-    
-   
-        
-    
+    // Global variables
+
     const frontCanvas = new fabric.Canvas('frontCanvas');
     const backCanvas = new fabric.Canvas('backCanvas');
     document.getElementsByClassName("canvas-container")[0].style.position = "absolute";
@@ -78,11 +75,7 @@
     let frontSide = document.getElementById('front-sideBtn');
     let backSide = document.getElementById('back-sideBtn');
     let frontSideBtn = true;
-    let arrayLength;
     let frontArrayLength;
-    
-    let i;
-    let addImage;
     let showIcon;
     let showHideFront = [];
     let showHideBack = [];
@@ -90,22 +83,30 @@
     let backIconIndex;
     let createBin;
     let divRetriangle;
+
+    // Listening frontSideBtn
+
     frontSide.addEventListener('click', btnValue)
     function btnValue(e){
         frontSideBtn = true;
         e.preventDefault();
     }
+
+    // Listening backSideBtn
+
     backSide.addEventListener('click', backBtnValue)
     function backBtnValue(e){
         frontSideBtn = false;
         e.preventDefault();
     }
+
     // Uploading image file and creating object
     
     realBtn.onchange = () => {
         let reader = new FileReader();
-        arrayLength = realBtn.files.length-1;
+        let arrayLength = realBtn.files.length-1;
         reader.readAsDataURL(realBtn.files[arrayLength]);
+
          // Creating div and styling 
 
             divRetriangle = document.createElement('div');
@@ -113,17 +114,13 @@
                 
                 divRetriangle.className = "front-index";
                 frontIconIndex = document.getElementsByClassName("front-index").length;
-                console.log(frontIconIndex);
                 divRetriangle.id = "front-index"+frontIconIndex;
-                
             }
              else{
                 
                 divRetriangle.className = "back-index";
                 backIconIndex = document.getElementsByClassName("back-index").length;
-                console.log(backIconIndex);
                 divRetriangle.id = "back-index"+backIconIndex; 
-                
             }
             divRetriangle.style.height = '70px';
             divRetriangle.style.width = '330px';
@@ -131,27 +128,6 @@
             divRetriangle.style.float = "left";
             holder.appendChild(divRetriangle);
 
-            
-        addImage = document.createElement('img');
-        
-        
-         if(frontSideBtn == true){
-                
-                addImage.style.zIndex = parseInt(4+frontIconIndex);
-             
-            
-            addImage.className = "frontSide front-canvas-img"; 
-            addImage.id = "frontSide"+frontIconIndex; 
-         } else {
-                
-                addImage.style.zIndex = parseInt(4+backIconIndex);
-            
-            addImage.id = "backSide"+backIconIndex;
-            addImage.className = "backSide back-canvas-img";
-        }
-        
-        addImage.style.zIndex = parseInt(10+arrayLength);
-        addImage.style.display = "inherit";
         reader.onload = (e) => { 
         let imgObj = new Image();
         imgObj.src = e.target.result;
@@ -171,10 +147,8 @@
                 backCanvas.renderAll();
             }
         }
-       
-       
 
-        // miniImage holder
+        // Creating miniImage holder and Styling
 
             let miniImageHolder = document.createElement('div');
             miniImageHolder.className = "image-holder"
@@ -204,6 +178,7 @@
             text.innerHTML = realBtn.files[0].name;
              text.style.float = "left";
             text.style.display = "inline-block";
+
         // Selecting div to put element into div
 
             divRetriangle.appendChild(text);
@@ -213,11 +188,13 @@
             showIcon = document.createElement('img');
 
         // Styling and setting image
+
             let rightSideHolder = document.createElement("div");
             rightSideHolder.style.width = "85px";
-            // rightSideHolder.style.display = "inline";
             rightSideHolder.style.float = "left";
             divRetriangle.appendChild(rightSideHolder);
+
+        // Styling showHideIcon 
 
             showIcon.setAttribute("src","open.png");
             showIcon.style.width = "25px";
@@ -235,31 +212,42 @@
                 showIcon.className = "backIcon";
                 showHideBack[backIconIndex] = true;
             }
-        
 
         // Listening event on icon
 
             showIcon.addEventListener('click',changeIcon);
             rightSideHolder.appendChild(showIcon);
 
+        // Creating bin image
             
             createBin = document.createElement("img");
+
+        // Styling bin image
+
             createBin.setAttribute("src","bin.png");
             createBin.style.width = "25px";
             createBin.style.float = "left";
             createBin.style.marginTop = "20px";
             createBin.style.display = "block";
             createBin.style.marginLeft = "15px";
+
+        // Adding id and className to bin image
+
             if(frontSideBtn == true){
                 createBin.id = "front-bin"+frontIconIndex;
                 createBin.className = "frontBin";    
             } else {createBin.id = "back-bin"+backIconIndex;
             createBin.className = "backBin";   
             }
-            
-            createBin.addEventListener("click",deleteElement);
+
+        // Putting bin image in rightSideHolder
+
             rightSideHolder.appendChild(createBin);
-            
+
+        // Listening bin image  
+
+            createBin.addEventListener("click",deleteElement);
+
         }
     }
         //Deleting element
@@ -269,39 +257,23 @@
             
             if(frontSideBtn == true){
             let getElement = e.target.id;
-            console.log(getElement);
             let idText = getElement.match(/\d/g).join('');
-            console.log(idText);
-            let getId;
                 frontCanvas.remove(frontCanvas.item(idText));
                 frontCanvas.renderAll();
-                
                 document.getElementById("front-index"+idText).remove();
-                
                 let binElements = document.querySelectorAll(".front-index");
-                console.log(binElements);
-                console.log(createBin);
                 binElements.forEach( (e,i) => {
-                    console.log(i);
                     e.id = "front-index"+i;
-                    console.log(e.id);
                     document.getElementsByClassName("frontBin")[i].id = "front-bin"+ i;
-                    console.log(createBin.id);
                     document.getElementsByClassName("frontIcon")[i].id = "frontIcon"+ i;
-                    console.log(showIcon.id);
                 });
-                
             } else {
                 let getElement = e.target.id;
-                console.log(getElement);
                 let idText = getElement.match(/\d/g).join('');
-                console.log(idText);
-                console.log(backCanvas.item(idText));
                 backCanvas.remove(backCanvas.item(idText));
                 backCanvas.renderAll();
                 document.getElementById("back-index"+idText).remove();
                 let binElements = document.querySelectorAll(".back-index");
-                console.log(binElements);
                 binElements.forEach( (e,i) => {
                     document.getElementsByClassName("backBin")[i].id = "back-bin"+i;
                     document.getElementsByClassName("backIcon")[i].id = "backIcon"+i;
@@ -313,24 +285,20 @@
         
         //Changing icon
         
-     function changeIcon(e){
-        let getIcon = e.target.id;
-        let idText = getIcon.match(/\d/g).join('');
-        console.log(idText);
-        showIcon = e.target;
-             if(showIcon.getAttribute('src') == "open.png"){
-                 showIcon.setAttribute("src","closed.png");
-                 if(frontSideBtn == true){
+            function changeIcon(e){
+            let getIcon = e.target.id;
+            let idText = getIcon.match(/\d/g).join('');
+            showIcon = e.target;
+                if(showIcon.getAttribute('src') == "open.png"){
+                    showIcon.setAttribute("src","closed.png");
+                if(frontSideBtn == true){
                     frontCanvas.item(idText).visible = false;
                     frontCanvas.renderAll();
                     showHideFront[idText] = false;
-                    console.log(showHideFront[idText]);
-                 }
-                 else{
+                 } else{
                     backCanvas.item(idText).visible = false;
                     backCanvas.renderAll();
                     showHideBack[idText] = false;
-                    console.log(showHideBack[idText]);
                  }
              } else {
                 showIcon.setAttribute("src","open.png");
@@ -338,97 +306,81 @@
                     frontCanvas.item(idText).visible = true;
                     frontCanvas.renderAll();
                     showHideFront[idText] = true;
-                    console.log(showHideFront[idText]);
-               } else{
+               } else {
                 backCanvas.item(idText).visible = true;
                 backCanvas.renderAll();
                     showHideBack[idText] = true;
-                    console.log(showHideBack[idText]);
                  }
-                }
+            }
         e.preventDefault();
      }
-        
 
         // Listening and getting frontSide Btn
     
-    frontSide.addEventListener('click',changeToFrontSide);
+        frontSide.addEventListener('click',changeToFrontSide);
     
-    function changeToFrontSide(e){
-        document.getElementsByClassName("canvas-container")[0].style.zIndex = "101";
-        document.getElementsByClassName("canvas-container")[1].style.zIndex = "100";
-        document.getElementById('front').style.display = 'inline';
-        document.getElementById('back').style.display = 'none';
-        document.getElementById('back-background').style.display = 'none';
-        document.getElementById('front-background').style.display = 'inline';
-        document.getElementById('front-sideBtn').style.backgroundColor = '#0a1e42';
-        document.getElementById('back-sideBtn').style.backgroundColor = '#133879';
+        function changeToFrontSide(e){
+
+            // Changing backSideElements to frontSideElements
+
+            document.getElementsByClassName("canvas-container")[0].style.zIndex = "101";
+            document.getElementsByClassName("canvas-container")[1].style.zIndex = "100";
+            document.getElementById('front').style.display = 'inline';
+            document.getElementById('back').style.display = 'none';
+            document.getElementById('back-background').style.display = 'none';
+            document.getElementById('front-background').style.display = 'inline';
+            document.getElementById('front-sideBtn').style.backgroundColor = '#0a1e42';
+            document.getElementById('back-sideBtn').style.backgroundColor = '#133879';
         
-                // Showing frontSide images if they are added and setting their properties
-                    document.getElementById("frontCanvas").style.display = "initial";
-                    document.getElementById("backCanvas").style.display = "none";
-                let frontElements = document.querySelectorAll(".frontSide");
-                
-                    console.log(frontElements);
-                    frontElements.forEach((e,i) => {
-                        if(showHideFront[i] == true){
-                        document.getElementById("frontSide"+i).style.display = "flex";
-                        console.log ("flex");
-                        } else {
-                        document.getElementById("frontSide"+i).style.display = "none";
-                        console.log ("none");
-                        }
-                    });
-                
+        // Showing frontSide images if they are added and setting their properties
 
-            // Disappearing backSide images 
-            let backElements = document.querySelectorAll(".backSide");
-             backElements.forEach((e,i) => {
-                if(document.getElementsByClassName('backSide').length > 0){
-                    document.getElementById("backSide"+i).style.display = "none";  
-                    
+            document.getElementById("frontCanvas").style.display = "initial";
+            document.getElementById("backCanvas").style.display = "none";
+        let frontElements = document.querySelectorAll(".frontSide");
+            frontElements.forEach((e,i) => {
+                if(showHideFront[i] == true){
+                    document.getElementById("frontSide"+i).style.display = "flex";
                 } else {
-                    console.log("false");
-                }
-             });
+                    document.getElementById("frontSide"+i).style.display = "none";
+                    }
+            });
 
-            // Showing frontSide layers and setting their properties
+        // Disappearing backSide images 
 
-                let frontHolder = document.querySelectorAll(".front-index")
-                frontHolder.forEach((e,i) => {
-                 if(document.getElementsByClassName("front-index").length > 0) {
-                    document.getElementById('front-index'+i).style.display = "inherit";
-                     if(showHideFront[i] == true) {
+        let backElements = document.querySelectorAll(".backSide");
+            backElements.forEach((e,i) => {
+            document.getElementById("backSide"+i).style.display = "none";  
+            });
+
+        // Showing frontSide layers and setting their properties
+
+        let frontHolder = document.querySelectorAll(".front-index")
+            frontHolder.forEach((e,i) => {
+                document.getElementById('front-index'+i).style.display = "inherit";
+                    if(showHideFront[i] == true) {
                         document.getElementById("frontIcon"+i).setAttribute("src","open.png");
                      } else {
                         document.getElementById("frontIcon"+i).setAttribute("src","closed.png");
                     }   
-                 } else {
-                    console.log("false");
-                 }
              });
 
-            // Disappearing backSide layers
+        // Disappearing backSide layers
 
-             let backHolder = document.querySelectorAll(".back-index");
-             
-             backHolder.forEach((e,i) =>{
-                 if(document.getElementsByClassName("back-index").length > 0){
-                    document.getElementById("back-index"+i).style.display = "none";
-                    
-                 } else {
-                    showHideBack[i] = null;   
-                 }
+        let backHolder = document.querySelectorAll(".back-index");
+            backHolder.forEach((e,i) =>{
+            document.getElementById("back-index"+i).style.display = "none";
             });
         e.preventDefault();
     }
 
-    // Listening backSide Btn
+        // Listening backSide Btn
 
-    backSide.addEventListener('click',changeToBackSide);
+        backSide.addEventListener('click',changeToBackSide);
 
     function changeToBackSide(e)
     {
+        // Changing frontSideElements to backSideElements
+
         document.getElementsByClassName("canvas-container")[0].style.zIndex = "100";
         document.getElementsByClassName("canvas-container")[1].style.zIndex = "101";
         document.getElementById('front').style.display = 'none';
@@ -439,14 +391,13 @@
         document.getElementById('front-sideBtn').style.backgroundColor = '#133879';
             
             // Disappearing frontSide images
+
             document.getElementById("frontCanvas").style.display = "none";
             document.getElementById("backCanvas").style.display = "initial";
-            
 
             // Showing backSide images and setting their properties
+
                 let backElements = document.querySelectorAll(".backSide");
-                
-                 
                     backElements.forEach((e,i) => {
                      if(showHideBack[i] == true){
                         document.getElementById("backIcon"+i).setAttribute("src","open.png");
@@ -455,54 +406,37 @@
                         document.getElementById("backIcon"+i).setAttribute("src","closed.png");
                         document.getElementById("backSide"+i).style.display = "none";
                     }
-                    
                 });
               
 
             // Disappearing front layers
+
             let frontHolder = document.querySelectorAll(".front-index");
-            
              frontHolder.forEach((e,i) => {   
-                 if(document.getElementsByClassName('front-index').length > 0){
                     document.getElementById("front-index"+i).style.display = "none";
-                    
-                 } else {
-                    console.log("false");
-                  }
-                
              });
             
-            // Setting layer icon to opened or closed and showing layers
+            // Setting layer icon to opened or closed and showing back layers
 
-                 
-                    let backHolder = document.querySelectorAll(".back-index");
-                        
+                let backHolder = document.querySelectorAll(".back-index");
                     backHolder.forEach((e,i) => {
-                        console.log(i);
                     document.getElementById("back-index"+i).style.display = "inherit";
                     if(showHideBack[i] == true){
                         document.getElementById("backIcon"+i).setAttribute("src","open.png");
-                        console.log("tylnia ikona "+i+" jest widoczna");
                     } else {
                         document.getElementById("backIcon"+i).setAttribute("src","closed.png");
-                        console.log ("tylnia ikona "+i+" jest niewidoczna");
                       }
-                      
                     });
-                 
-            
         e.preventDefault();
     }
     // Downloading image
+
     const saveBtn = document.getElementById("saveBtn");
-    
-    // Creating downloadable image
     saveBtn.addEventListener('click', function(){
-    
-domtoimage.toBlob(document.getElementById('left-side'))
+    domtoimage.toBlob(document.getElementById('left-side'))
     .then(function (blob) {
         window.saveAs(blob, 'my-node.png');
+        });
     });
-     });
 
  
