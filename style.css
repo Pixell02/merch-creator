@@ -2,7 +2,7 @@
 body{
     margin: 0;
     background-color: #040913;
-    font-family: Montserrat medium;
+    font-family: 'Montserrat', sans-serif;
     
 }
 #header-top{
@@ -55,7 +55,7 @@ body{
     background-color: #0a1e42 !important;
 }
 
-#create{
+#front-t-shirt{
     margin-left: 148px;
 }
 
