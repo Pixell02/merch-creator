@@ -196,7 +196,7 @@
 
         // Styling showHideIcon 
 
-            showIcon.setAttribute("src","open.png");
+            showIcon.setAttribute("src","items/open.png");
             showIcon.style.width = "25px";
             showIcon.style.float = "left";
             showIcon.style.display = "inline";
@@ -224,7 +224,7 @@
 
         // Styling bin image
 
-            createBin.setAttribute("src","bin.png");
+            createBin.setAttribute("src","items/bin.png");
             createBin.style.width = "25px";
             createBin.style.float = "left";
             createBin.style.marginTop = "20px";
@@ -289,8 +289,8 @@
             let getIcon = e.target.id;
             let idText = getIcon.match(/\d/g).join('');
             showIcon = e.target;
-                if(showIcon.getAttribute('src') == "open.png"){
-                    showIcon.setAttribute("src","closed.png");
+                if(showIcon.getAttribute('src') == "items/open.png"){
+                    showIcon.setAttribute("src","items/closed.png");
                 if(frontSideBtn == true){
                     frontCanvas.item(idText).visible = false;
                     frontCanvas.renderAll();
@@ -301,7 +301,7 @@
                     showHideBack[idText] = false;
                  }
              } else {
-                showIcon.setAttribute("src","open.png");
+                showIcon.setAttribute("src","items/open.png");
                 if(frontSideBtn == true){
                     frontCanvas.item(idText).visible = true;
                     frontCanvas.renderAll();
@@ -358,9 +358,9 @@
             frontHolder.forEach((e,i) => {
                 document.getElementById('front-index'+i).style.display = "inherit";
                     if(showHideFront[i] == true) {
-                        document.getElementById("frontIcon"+i).setAttribute("src","open.png");
+                        document.getElementById("frontIcon"+i).setAttribute("src","items/open.png");
                      } else {
-                        document.getElementById("frontIcon"+i).setAttribute("src","closed.png");
+                        document.getElementById("frontIcon"+i).setAttribute("src","items/closed.png");
                     }   
              });
 
@@ -400,10 +400,10 @@
                 let backElements = document.querySelectorAll(".backSide");
                     backElements.forEach((e,i) => {
                      if(showHideBack[i] == true){
-                        document.getElementById("backIcon"+i).setAttribute("src","open.png");
+                        document.getElementById("backIcon"+i).setAttribute("src","items/open.png");
                         document.getElementById("backSide"+i).style.display = "inherit";
                     } else {
-                        document.getElementById("backIcon"+i).setAttribute("src","closed.png");
+                        document.getElementById("backIcon"+i).setAttribute("src","items/closed.png");
                         document.getElementById("backSide"+i).style.display = "none";
                     }
                 });
@@ -422,9 +422,9 @@
                     backHolder.forEach((e,i) => {
                     document.getElementById("back-index"+i).style.display = "inherit";
                     if(showHideBack[i] == true){
-                        document.getElementById("backIcon"+i).setAttribute("src","open.png");
+                        document.getElementById("backIcon"+i).setAttribute("src","items/open.png");
                     } else {
-                        document.getElementById("backIcon"+i).setAttribute("src","closed.png");
+                        document.getElementById("backIcon"+i).setAttribute("src","items/closed.png");
                       }
                     });
         e.preventDefault();
