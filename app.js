@@ -13,6 +13,28 @@
         let imgId = e.target.id;
         console.log(imgId);
         modal.style.display = "flex";
+        let frontSideImage = document.createElement("img");
+        frontSideImage.setAttribute("src","items/"+ imgId + ".png");
+        frontSideImage.id = "front";
+        frontSideImage.className = "background";
+        document.getElementById("left-side").appendChild(frontSideImage);
+        let frontSideBackground = document.createElement("img");
+        frontSideBackground.setAttribute("src","items/"+ imgId + "background.png");
+        frontSideBackground.id = "front-background";
+        frontSideBackground.className = "background";
+        document.getElementById("left-side").appendChild(frontSideBackground);
+        let backSideImage = document.createElement("img");
+        let backImgId = imgId.split("-");
+        console.log(backImgId);
+        backSideImage.setAttribute("src","items/back-"+ backImgId[1] + ".png");
+        backSideImage.id = "back";
+        backSideImage.className = "background back-canvas-img";
+        document.getElementById("left-side").appendChild(backSideImage);
+        let backSideBackground = document.createElement("img");
+         backSideBackground.setAttribute("src","items/back-"+ backImgId[1] + "Background.png");
+         backSideBackground.id = "back-background";
+         backSideBackground.className = "background back-canvas-img";
+        document.getElementById("left-side").appendChild( backSideBackground);
         e.preventDefault();
     }
     // Closing modal window
@@ -26,14 +48,16 @@
     // Get color from input
     
      let pickerColor = document.getElementById('pallet');
-     const backColor = document.getElementById('back-background');
-     const frontColor = document.getElementById('front-background');
+     
      let inputColor = document.getElementById('hexa-color');
     
     //Getting color value from input
     
     pickerColor.addEventListener('input',colorValue);
      function colorValue(e){
+        const backColor = document.getElementById('back-background');
+        let frontColor = document.getElementById('front-background');
+        
          backColor.style.backgroundColor = pickerColor.value;
          frontColor.style.backgroundColor = pickerColor.value;
          inputColor.value = pickerColor.value;
@@ -44,6 +68,8 @@
     inputColor.addEventListener('input',inputValue);
 
     function inputValue(e){
+        const backColor = document.getElementById('back-background');
+        const frontColor = document.getElementById('front-background');
         frontColor.style.backgroundColor = inputColor.value;
         backColor.style.backgroundColor = inputColor.value;
         
@@ -114,13 +140,11 @@
 
             divRetriangle = document.createElement('div');
             if(frontSideBtn == true){
-                
                 divRetriangle.className = "front-index";
                 frontIconIndex = document.getElementsByClassName("front-index").length;
                 divRetriangle.id = "front-index"+frontIconIndex;
             }
              else{
-                
                 divRetriangle.className = "back-index";
                 backIconIndex = document.getElementsByClassName("back-index").length;
                 divRetriangle.id = "back-index"+backIconIndex; 
@@ -330,8 +354,8 @@
             document.getElementsByClassName("canvas-container")[1].style.zIndex = "100";
             document.getElementById('front').style.display = 'inline';
             document.getElementById('back').style.display = 'none';
-            document.getElementById('back-background').style.display = 'none';
             document.getElementById('front-background').style.display = 'inline';
+            document.getElementById('back-background').style.display = 'none';
             document.getElementById('front-sideBtn').style.backgroundColor = '#0a1e42';
             document.getElementById('back-sideBtn').style.backgroundColor = '#133879';
         
@@ -388,47 +412,46 @@
         document.getElementsByClassName("canvas-container")[1].style.zIndex = "101";
         document.getElementById('front').style.display = 'none';
         document.getElementById('back').style.display = 'inline';
-        document.getElementById('back-background').style.display = 'inline';
         document.getElementById('front-background').style.display = 'none';
+        document.getElementById('back-background').style.display = 'inline';
         document.getElementById('back-sideBtn').style.backgroundColor = '#0a1e42';
         document.getElementById('front-sideBtn').style.backgroundColor = '#133879';
             
-            // Disappearing frontSide images
+        // Disappearing frontSide images
 
-            document.getElementById("frontCanvas").style.display = "none";
-            document.getElementById("backCanvas").style.display = "initial";
+        document.getElementById("frontCanvas").style.display = "none";
+        document.getElementById("backCanvas").style.display = "initial";
 
-            // Showing backSide images and setting their properties
+        // Showing backSide images and setting their properties
 
-                let backElements = document.querySelectorAll(".backSide");
-                    backElements.forEach((e,i) => {
-                     if(showHideBack[i] == true){
-                        document.getElementById("backIcon"+i).setAttribute("src","items/open.png");
-                        document.getElementById("backSide"+i).style.display = "inherit";
-                    } else {
-                        document.getElementById("backIcon"+i).setAttribute("src","items/closed.png");
-                        document.getElementById("backSide"+i).style.display = "none";
+            let backElements = document.querySelectorAll(".backSide");
+                backElements.forEach((e,i) => {
+                if(showHideBack[i] == true){
+                    document.getElementById("backIcon"+i).setAttribute("src","items/open.png");
+                    document.getElementById("backSide"+i).style.display = "inherit";
+                } else {
+                    document.getElementById("backIcon"+i).setAttribute("src","items/closed.png");
+                     document.getElementById("backSide"+i).style.display = "none";
                     }
                 });
               
-
-            // Disappearing front layers
+        // Disappearing front layers
 
             let frontHolder = document.querySelectorAll(".front-index");
-             frontHolder.forEach((e,i) => {   
+                frontHolder.forEach((e,i) => {   
                     document.getElementById("front-index"+i).style.display = "none";
-             });
+                });
             
-            // Setting layer icon to opened or closed and showing back layers
+        // Setting layer icon to opened or closed and showing back layers
 
-                let backHolder = document.querySelectorAll(".back-index");
-                    backHolder.forEach((e,i) => {
-                    document.getElementById("back-index"+i).style.display = "inherit";
-                    if(showHideBack[i] == true){
-                        document.getElementById("backIcon"+i).setAttribute("src","items/open.png");
-                    } else {
-                        document.getElementById("backIcon"+i).setAttribute("src","items/closed.png");
-                      }
+            let backHolder = document.querySelectorAll(".back-index");
+                backHolder.forEach((e,i) => {
+                document.getElementById("back-index"+i).style.display = "inherit";
+                if(showHideBack[i] == true){
+                     document.getElementById("backIcon"+i).setAttribute("src","items/open.png");
+                } else {
+                    document.getElementById("backIcon"+i).setAttribute("src","items/closed.png");
+                }
                     });
         e.preventDefault();
     }
