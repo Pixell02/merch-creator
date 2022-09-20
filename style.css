@@ -1,13 +1,14 @@
 /* Global and main page styling */
-body{
+body {
     margin: 0;
     background-color: #040913;
     font-family: 'Montserrat', sans-serif;
-    
+
 }
-#header-top{
+
+#header-top {
     height: 60px;
-    background-color: #071225;   
+    background-color: #071225;
     color: white;
     text-align: center;
     font-size: 30px;
@@ -21,27 +22,33 @@ body{
     border: solid rgb(71, 71, 71) 1px;
     margin-left: 150px;
     margin-top: 40px;
-    
+    display: inline-block;
+
 }
-.image{
+
+.image {
     margin-left: -40px;
-    
+
 }
+
 .merch .zoom-in figure img {
-	transform: scale(1);
-	transition: 0.5s ease-in-out;
+    transform: scale(1);
+    transition: 0.5s ease-in-out;
 }
+
 .merch .zoom-in figure:hover img {
-	transform: scale(1.1);
+    transform: scale(1.1);
 }
+
 .merch img {
-	display: block;
-	width: 200px;
+    display: block;
+    width: 200px;
 }
+
 
 /* Styling Button class */
 
-.Button{
+.Button {
     color: white;
     font-size: 110%;
     border: none;
@@ -51,17 +58,18 @@ body{
     border-right: #1b305a solid;
     background-color: #133879;
 }
-.Button:hover{
+
+.Button:hover {
     background-color: #0a1e42 !important;
 }
 
-#front-Tshirt{
+/* .item-button{
     margin-left: 148px;
-}
+} */
 
 /* Styling modal window */
 
-#modal{
+#modal {
     display: none;
     position: fixed;
     background-color: rgba(0, 0, 0, 0.5);
@@ -71,51 +79,59 @@ body{
     width: 100%;
     justify-content: center;
     overflow: scroll;
-    
+
 }
-#modal-creator{
+
+#modal-creator {
     background-color: white;
     margin: 10%;
     padding: 20px;
     width: 1100px;
     height: 480px;
-    
-    
+
+
 }
-#left-side, #middle, #files-holder{
+
+#left-side,
+#middle,
+#files-holder {
     float: left;
 }
 
-#middle{
+#middle {
     height: 440px;
     width: 300px;
 }
 
 /* Modal bar elements styling */
 
-#front-sideBtn{
+#front-sideBtn {
     background-color: #0a1e42;
-   
+
 }
-#saveBtn{
+
+#saveBtn {
     margin-left: 440px;
 }
-#closeBtn{
+
+#closeBtn {
     float: right;
     font-size: 30px;
     top: 0;
     color: #155adb;
 }
-#closeBtn:hover, #closeBtn:focus{
-    color:#000000 ;
+
+#closeBtn:hover,
+#closeBtn:focus {
+    color: #000000;
 }
 
-input[type=file]{
+input[type=file] {
     display: none;
 }
 
-#file{
-    
+#file {
+
     margin-top: 12px;
     margin-left: 50px;
 }
@@ -124,38 +140,39 @@ input[type=file]{
 
 
 
-#left-side{
+#left-side {
     width: 410px;
     height: 410px;
     margin-top: 10px;
     position: relative;
-    
+
 }
-#left-side .background{
+
+#left-side .background {
     margin-top: 10px;
     border: rgba(0, 0, 0, 0.5) solid 1px;
-    width: 408px;  
+    width: 408px;
     margin-left: 0px;
-    mix-blend-mode: multiply;  
-    
-    
+    mix-blend-mode: multiply;
+
+
 }
-#drawingArea{
-    
-    width: 410px;
-    height: 410px;
-    position: absolute;
-    z-index: 1000;
-    
+
+#frontCanvas,
+.upper-canvas {
+    margin-top: 100px !important;
 }
+
 .myCanvas {
     margin-top: 50px;
     width: 100px;
     height: 200px;
     margin-left: 130px;
-    
+
 }
-.frontSide, .backSide{
+
+.frontSide,
+.backSide {
     position: absolute;
     max-height: 250px;
     margin-top: 110px;
@@ -164,26 +181,30 @@ input[type=file]{
     overflow: hidden;
     z-index: 4;
 }
-#front{
+
+#front {
     position: absolute;
-    display: inline;
+    
 }
-#front-background{
+
+#front-background {
     position: absolute;
-    display: inline;
+    
 }
-#back{
+
+#back {
     display: none;
     position: absolute;
 }
-#back-background{
+
+#back-background {
     display: none;
     position: absolute;
 }
 
 /* middle element styling */
 
-#pallet{
+#pallet {
     width: 205px;
     height: 300px;
     position: relative;
@@ -191,7 +212,8 @@ input[type=file]{
     margin-top: 10px;
     border: none;
 }
-#hexa-color{
+
+#hexa-color {
     width: 190px;
     font-size: 20px;
     margin-left: 50px;
@@ -200,15 +222,16 @@ input[type=file]{
 
 /* Right side/Files-holder styling */
 
-#files-holder{
-    border: #040913 solid 1px; 
+#files-holder {
+    border: #040913 solid 1px;
     width: 350px;
     height: 410px;
     margin-top: 10px;
     margin-right: 10px;
     overflow: scroll;
 }
-.image-holder img{
+
+.image-holder img {
     display: block;
     position: relative;
     max-width: 80%;
@@ -217,14 +240,44 @@ input[type=file]{
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.front-index span, .back-index span{
+
+.front-index span,
+.back-index span {
     color: black;
     width: 140px;
     margin-left: 20px;
+    float: left;
     height: 50px;
     font-family: Arial, Helvetica, sans-serif;
     overflow: hidden;
     margin-top: 25px;
     display: inline-block;
     text-align: center;
+}
+.front-index, .back-index{
+    float: left;
+    height: 70px;
+    width: 330px;
+    border-bottom: solid black 1px;
+}
+.frontIcon, .backIcon{
+    width: 25px;
+    float: left;
+    display: inline;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+.frontBin, .backBin{
+    width: 25px;
+    float: left;
+    margin-top: 20px;
+    display: block;
+    margin-left: 15px;
+}
+.image-holder{
+    float: left;
+    display: inline-block;
+    border-right: solid black 1px;
+    height: 70px;
+    width: 80px;
 }
