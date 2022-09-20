@@ -1,60 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    
+
     <title>Document</title>
 </head>
+
 <body>
-    
+
     <section id="header-top">Merch creator</section>
+
     <section class="merch">
         <section class="image">
             <section class="zoom-in">
                 <figure>
-                <img src="items/front-Tshirt.png" alt="t-shirt">
+                    <img src="items/front-Tshirt.png" alt="t-shirt">
                 </figure>
-            </section>   
-        </section> 
+            </section>
+        </section>
+        <button id="front-Tshirt" class="Button item-button">Create</button>
     </section>
-    
-    <button id="front-Tshirt" class="Button item-button">Create</button>
+
+    <section class="merch">
+        <section class="image">
+            <section class="zoom-in">
+                <figure>
+                    <img src="items/front-sweatshirt.png" alt="t-shirt">
+                </figure>
+            </section>
+        </section>
+        <button id="front-sweatshirt" class="Button item-button">Create</button>
+    </section>
+
+    </section>
     <div id="modal">
-        <div id="modal-creator" >
-            <div id="modal-bar"><button id="front-sideBtn" class="Button">Front side</button>
-                <button id="back-sideBtn" class="Button">Back side</button>
+        <div id="modal-creator">
+            <div id="modal-bar">
+                <button id="front-sideBtn" class="Button side-button">Front side</button>
+                <button id="back-sideBtn" class="Button side-button">Back side</button>
                 <button id="saveBtn" class="Button">Save</button>
                 <span id="closeBtn">&times;</span>
             </div>
-    
-        <div id="left-side">
-            <div id="drawingArea" class="drawing-area">
-                <canvas id="frontCanvas" class="myCanvas" width="150" height="220"> </canvas>
-                <canvas id="backCanvas" class="myCanvas" width="150" height="300"> </canvas>
-            </div>
-              
-        </div>
 
-        <div id="middle"><input type="file" class="Button" id="file-upload" accept="image/*"> 
-            <button id="file" class="Button">Upload</button>
-            <input type="color" id="pallet" value="#FFFFFF">
-        <input type="text" id="hexa-color" value="#FFFFFF" maxlength="7">
+            <div id="left-side">
+
+                <canvas id="frontCanvas" class="myCanvas" width="150" height="260"> </canvas>
+                <canvas id="backCanvas" class="myCanvas" width="150" height="300"> </canvas>
+
+
+            </div>
+
+            <div id="middle"><input type="file" class="Button" id="file-upload" accept="image/*">
+                <button id="file" class="Button">Upload</button>
+                <input type="color" id="pallet" value="#FFFFFF">
+                <input type="text" id="hexa-color" value="#FFFFFF" maxlength="7">
+            </div>
+            <div id="files-holder"></div>
         </div>
-        <div id="files-holder"></div>
     </div>
-    </div> 
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
     <script src="fabric.min.js"></script>
-    
+
     <script src="app.js"></script>
-    
+
 </body>
+
 </html>
