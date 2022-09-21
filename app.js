@@ -31,12 +31,10 @@
         item.addEventListener('click', openModal);
     });
     let imgId;
-
+    
     function openModal(e) {
         x = 0;
         imgId = e.target.id;
-        console.log(imgId);
-        
         console.log(imgId);
         modal.style.display = "flex";
         frontSide.addEventListener("click", getFrontImagesFromSessionStorage(imgId));
@@ -139,6 +137,7 @@
     frontSide.addEventListener('click', btnValue)
 
     function btnValue(e) {
+        x = 0;
         frontSideBtn = true;
         e.preventDefault();
     }
@@ -209,7 +208,7 @@
         document.getElementById("left-side").appendChild(frontSideImage);
 
         let frontSideBackground = document.createElement("img");
-        frontSideBackground.setAttribute("src", "items/" + imgId + "background.png");
+        frontSideBackground.setAttribute("src", "items/" + imgId + "Background.png");
         frontSideBackground.id = "front-background";
         frontSideBackground.className = "background left-side";
         document.getElementById("left-side").appendChild(frontSideBackground);
@@ -248,9 +247,9 @@
             backSessionStorage = [];
           } else {
             backSessionStorage = JSON.parse(sessionStorage.getItem("back-"+backId[1]));
-          
+            x = 0;
             backSessionStorage.forEach((image, i) => {
-            showBackImagesAndDivRetriangle(image, i);
+            showBackImagesAndDivRetriangle(image, i, x);
           });}
         }
 
@@ -284,10 +283,7 @@
                         console.log(frontCanvas.item(x));
                         x++;
                         console.log(x);
-                        // frontCanvas.forEach((element, i) => {
-                        //     element.item(i).moveTo(10000-i);
-                        // });
-                        
+                       
                         frontCanvas.renderAll();
                                           
                     }
@@ -368,17 +364,23 @@
             }
 
     function showBackImagesAndDivRetriangle(image){
+        
         names = image.split("-");  
         let imgObj = new Image();
         imgObj.src = names[0];
         imgObj.onload = function () {
+            
+            console.log(x);
             let newImg = new fabric.Image(imgObj);
             newImg.scaleToHeight(150);
             newImg.scaleToWidth(150);
-            newImg.style.zIndex = 10000 - document.querySelectorAll(".back-index").length;
             newImg.visible = true;
             backCanvas.centerObject(newImg);
             backCanvas.add(newImg);
+            console.log(backCanvas.item(x));
+            backCanvas.item(x).moveTo(0-x);
+            
+            x++;
             backCanvas.renderAll();            
         }
         console.log(names[0]);
@@ -466,14 +468,17 @@
     backSide.addEventListener('click', backBtnValue);
 
     function backBtnValue(e) {
+        x = 0;
+        console.log(x);
         frontSideBtn = false;
         e.preventDefault();
     }
 
         
     // Uploading image file and creating object
-
-    realBtn.onchange = () => {
+    
+    realBtn.onchange = () => { 
+                       
         let reader = new FileReader();
         let arrayLength = realBtn.files.length - 1;
         reader.readAsDataURL(realBtn.files[arrayLength]);
@@ -483,7 +488,6 @@
             console.log (imgObj.src);
              console.log(realBtn.files[arrayLength].name);
             storeImageInSessionStorage(imgObj.src, realBtn.files[arrayLength].name, imgId);
-            
             divRetriangle = document.createElement('div');
         if (frontSideBtn == true) {
             divRetriangle.className = "front-index";
@@ -580,8 +584,9 @@
             // Listening bin image  
 
             createBin.addEventListener("click", deleteElement);
-
+            
             imgObj.onload = function () {
+                
                 let newImg = new fabric.Image(imgObj);
                 newImg.scaleToHeight(150);
                 newImg.scaleToWidth(150);
@@ -589,10 +594,16 @@
                 if (frontSideBtn == true) {
                     frontCanvas.centerObject(newImg);
                     frontCanvas.add(newImg);
+                    frontCanvas.item(x).moveTo(0-x);
+                    console.log(frontCanvas.item(x));
+                    x++;
                     frontCanvas.renderAll();
                 } else {
                     backCanvas.centerObject(newImg);
                     backCanvas.add(newImg);
+                    backCanvas.item(x).moveTo(0-x);
+                    console.log(backCanvas.item(x));
+                    x++;
                     backCanvas.renderAll();
                 }
             }
