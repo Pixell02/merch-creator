@@ -5,8 +5,8 @@ frontSide.addEventListener('click', changeToFrontSide);
         // Changing backSideElements to frontSideElements
         
         frontSideBtn = true;
-        document.getElementsByClassName("canvas-container")[0].style.zIndex = "101";
-        document.getElementsByClassName("canvas-container")[1].style.zIndex = "100";
+        document.getElementsByClassName("canvas-container")[0].style.zIndex = "11";
+        document.getElementsByClassName("canvas-container")[1].style.zIndex = "10";
         document.getElementById('front').style.display = 'inline';
         document.getElementById('back').style.display = 'none';
         document.getElementById('front-background').style.display = 'inline';
@@ -64,8 +64,8 @@ frontSide.addEventListener('click', changeToFrontSide);
         // Changing frontSideElements to backSideElements
         
         frontSideBtn = false;
-        document.getElementsByClassName("canvas-container")[0].style.zIndex = "100";
-        document.getElementsByClassName("canvas-container")[1].style.zIndex = "101";
+        document.getElementsByClassName("canvas-container")[0].style.zIndex = "10";
+        document.getElementsByClassName("canvas-container")[1].style.zIndex = "11";
         document.getElementById('front').style.display = 'none';
         document.getElementById('back').style.display = 'inline';
         document.getElementById('front-background').style.display = 'none';
@@ -110,4 +110,101 @@ frontSide.addEventListener('click', changeToFrontSide);
             }
         });
         e.preventDefault();
+    }
+
+    // Listening leftSide click
+
+    document.querySelector('#workspace').addEventListener("mouseup", setCoordsOfImage);
+
+    function setCoordsOfImage(e){
+        if(frontSideBtn == true){
+        let imageSrc = frontCanvas._activeObject.getSrc();
+        let topCoords = frontCanvas._activeObject.top;
+        let leftCoords = frontCanvas._activeObject.left;
+        let scaleX = frontCanvas._activeObject.scaleX;
+        let scaleY = frontCanvas._activeObject.scaleY;
+        let angle = frontCanvas._activeObject.angle;
+        console.log(imageSrc);
+        console.log(topCoords);
+        console.log(leftCoords);
+        let frontSessionStorage = [];
+        frontSessionStorage = JSON.parse(sessionStorage.getItem(imgId));
+        frontSessionStorage.forEach((item, i) => {
+            let splitData = item.split('&');
+            let firstPart = splitData[0];
+            if(firstPart == imageSrc){
+                splitData.splice(2, 5, topCoords, leftCoords, scaleX, scaleY, angle);
+                console.log(splitData[2] + " " + splitData[3]);
+                item = splitData[0] + "&" + splitData[1] + "&" + splitData[2] + "&" + splitData[3] + "&" + splitData[4] + "&" + splitData[5] + "&" + splitData[6];
+                console.log(item);
+                frontSessionStorage[i] = item;
+                
+            } else {
+                console.log('Invalid');
+            }
+            
+        });
+        document.querySelectorAll(".frontMiniImage").forEach((item, i) => {
+            let alt = item.getAttribute("alt");
+            let splitAlt = alt.split("&");
+            console.log(imageSrc);
+            if(imageSrc == splitAlt[0]){
+                splitAlt.splice(2, 5, topCoords, leftCoords, scaleX, scaleY, angle);
+                item.setAttribute("alt", splitAlt[0] + "&" + splitAlt[1] + "&" + splitAlt[2] + "&" + splitAlt[3] + "&" + splitAlt[4] + "&" + splitAlt[5] + "&" + splitAlt[6]);
+                console.log(item.getAttribute("alt"));
+            } else {
+                console.log("not the same");
+            }
+        });
+        console.log(frontSessionStorage);
+        sessionStorage.setItem(imgId, JSON.stringify(frontSessionStorage));
+        } else {
+
+        let imageSrc = backCanvas._activeObject.getSrc();
+        let topCoords = backCanvas._activeObject.top;
+        let leftCoords = backCanvas._activeObject.left;
+        let scaleX = backCanvas._activeObject.scaleX;
+        let scaleY = backCanvas._activeObject.scaleY;
+        let angle = backCanvas._activeObject.angle;
+        console.log(imageSrc);
+        console.log(topCoords);
+        console.log(leftCoords);
+        let backSessionStorage = [];
+        let backImgId = imgId.split("-");
+        console.log(backImgId[1]);
+        backSessionStorage = JSON.parse(sessionStorage.getItem("back-" + backImgId[1]));
+        backSessionStorage.forEach((item, i) => {
+            let splitData = item.split('&');
+            let firstPart = splitData[0];
+            if(firstPart == imageSrc){
+                splitData.splice(2, 5, topCoords, leftCoords, scaleX, scaleY, angle);
+                
+                console.log(splitData[2] + " " + splitData[3]);
+                item = splitData[0] + "&" + splitData[1] + "&" + splitData[2] + "&" + splitData[3] + "&" + splitData[4] + "&" + splitData[5]  + "&" + splitData[6];
+                console.log(item);
+                backSessionStorage[i] = item;
+                
+            } else {
+                console.log('Invalid');
+            }
+            
+        });
+        document.querySelectorAll(".backMiniImage").forEach((item, i) => {
+            let alt = item.getAttribute("alt");
+            let splitAlt = alt.split("&");
+            console.log(imageSrc);
+            if(imageSrc == splitAlt[0]){
+                splitAlt.splice(2, 5, topCoords, leftCoords, scaleX, scaleY, angle);
+                item.setAttribute("alt", splitAlt[0] + "&" + splitAlt[1] + "&" + splitAlt[2] + "&" + splitAlt[3] + "&" + splitAlt[4] + "&" + splitAlt[5]  + "&" + splitAlt[6]);
+                console.log(item.getAttribute("alt"));
+                
+            } else {
+                console.log("not the same");
+            }
+        });
+        console.log(backSessionStorage);
+        sessionStorage.setItem("back-" + backImgId[1], JSON.stringify(backSessionStorage));
+        }
+        e.preventDefault();
+    
     }
