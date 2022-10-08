@@ -9,10 +9,16 @@ pickerColor.addEventListener('input', colorValue);
 
 function colorValue(e) {
     const backColor = document.getElementById('back-background');
-    let frontColor = document.getElementById('front-background');
+    const frontColor = document.getElementById('front-background');
     backColor.style.backgroundColor = pickerColor.value;
     frontColor.style.backgroundColor = pickerColor.value;
     inputColor.value = pickerColor.value;
+    if(frontSideBtn == true) {
+        sessionStorage.setItem(imgId + '-color', pickerColor.value);
+    } else {
+        let backId = imgId.split("-");
+        sessionStorage.setItem("back-" + backId[1] + "-color", pickerColor.value);
+    }
     e.preventDefault();
 }
 
@@ -24,5 +30,11 @@ function inputValue(e) {
     frontColor.style.backgroundColor = inputColor.value;
     backColor.style.backgroundColor = inputColor.value;
     pickerColor.value = inputColor.value;
+    if(frontSideBtn == true) {
+        sessionStorage.setItem(imgId + '-color', pickerColor.value);
+    } else {
+        let backId = imgId.split("-");
+        sessionStorage.setItem("back-" + backId[1] + "-color", pickerColor.value);
+    }
     e.preventDefault();
 }
