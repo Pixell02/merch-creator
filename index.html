@@ -42,40 +42,43 @@
     </section>
     <div id="modal">
         <div id="modal-creator">
-            <div id="modal-bar">
-                <button id="front-sideBtn" class="Button side-button">Front side</button>
-                <button id="back-sideBtn" class="Button side-button">Back side</button>
-                <button id="saveBtn" class="Button">Save</button>
-                <span id="closeBtn">&times;</span>
+            <div id="left-side" class="container">
+                <div id="modal-bar">
+                    <button id="front-sideBtn" class="Button side-button left-items">Front side</button>
+                    <button id="back-sideBtn" class="Button side-button left-items">Back side</button>
+                </div>
+                <div id="workspace" class="left-items">
+                    <canvas id="frontCanvas" class="myCanvas" width="150" height="260"> </canvas>
+                    <canvas id="backCanvas" class="myCanvas" width="150" height="300"> </canvas>
+                </div>
             </div>
-            
-            <div id="left-side">
-
-                <canvas id="frontCanvas" class="myCanvas" width="150" height="260"> </canvas>
-                <canvas id="backCanvas" class="myCanvas" width="150" height="300"> </canvas>
-
-
-            </div>
-
-            <div id="middle"><input type="file" class="Button" id="file-upload" accept="image/*">
+            <div id="middle" class="container">
+                <input type="file" class="Button" id="file-upload" accept="image/*">
                 <button id="file" class="Button">Upload</button>
                 <input type="color" id="pallet" value="#FFFFFF">
                 <input type="text" id="hexa-color" value="#FFFFFF" maxlength="7">
             </div>
-            <div id="files-holder"></div>
+            <div id="right-side" >
+                <button id="preview" class="Button right-side-Btn">Preview</button>
+                <button id="saveBtn" class="Button right-side-Btn">Save</button>
+                <span id="closeBtn" class="closeBtn">&times;</span>
+                <div id="files-holder" class="container">  </div>
+            </div>
         </div>
     </div>
-    </div>
+    
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
     <script src="scripts/fabric.min.js"></script>
     <script src="scripts/app.js"></script>
+    <script src="scripts/preview.js"></script>
     <script src="scripts/color-picker.js"></script>
     <script src="scripts/upload-image.js"></script>
     <script src="scripts/left-side.js"></script>
     <script src="scripts/right-side-layers-holder.js"></script>
     <script src="scripts/save-file.js"></script>
-    
+    <script src="scripts/draggable.js"></script>
 </body>
 
 </html>

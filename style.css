@@ -28,7 +28,6 @@ body {
 
 .image {
     margin-left: -40px;
-
 }
 
 .merch .zoom-in figure img {
@@ -49,6 +48,7 @@ body {
 /* Styling Button class */
 
 .Button {
+    
     color: white;
     font-size: 110%;
     border: none;
@@ -57,15 +57,13 @@ body {
     transition: 1s;
     border-right: #1b305a solid;
     background-color: #133879;
+    align-items: center;
 }
 
 .Button:hover {
     background-color: #0a1e42 !important;
 }
 
-/* .item-button{
-    margin-left: 148px;
-} */
 
 /* Styling modal window */
 
@@ -81,26 +79,29 @@ body {
     overflow: scroll;
 
 }
+#modal-creator {
+    display: flex;
+    
+}
 
 #modal-creator {
     background-color: white;
     margin: 10%;
-    padding: 20px;
-    width: 1100px;
+    padding: 20px 10px 20px 20px;
+    width: 1105px;
     height: 480px;
-
-
 }
 
-#left-side,
+
 #middle,
 #files-holder {
-    float: left;
+    height: 700px;
 }
 
 #middle {
     height: 440px;
     width: 300px;
+    margin-top: 50px;
 }
 
 /* Modal bar elements styling */
@@ -110,19 +111,22 @@ body {
 
 }
 
-#saveBtn {
-    margin-left: 440px;
+#preview-closeBtn {
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
 }
 
-#closeBtn {
-    float: right;
+.closeBtn {
+    display: inline-block;
     font-size: 30px;
     top: 0;
     color: #155adb;
+    margin-left: 10px;
 }
 
-#closeBtn:hover,
-#closeBtn:focus {
+.closeBtn:hover,
+.closeBtn:focus {
     color: #000000;
 }
 
@@ -131,36 +135,34 @@ input[type=file] {
 }
 
 #file {
-
     margin-top: 12px;
     margin-left: 50px;
 }
 
 /* Left-side styling elements */
 
-
-
-#left-side {
-    width: 410px;
-    height: 410px;
+#workspace {
+    min-width: 420px;
+    min-height: 410px;
     margin-top: 10px;
-    position: relative;
-
 }
 
-#left-side .background {
-    margin-top: 10px;
+
+#modal-bar {
+    min-width: 420px;
+    max-height: 50px;
+}
+#workspace .background {
+    
     border: rgba(0, 0, 0, 0.5) solid 1px;
-    width: 408px;
+    width: 410px;
     margin-left: 0px;
     mix-blend-mode: multiply;
-
-
 }
 
 #frontCanvas,
 .upper-canvas {
-    margin-top: 100px !important;
+    margin-top: 90px ;
 }
 
 .myCanvas {
@@ -182,15 +184,12 @@ input[type=file] {
     z-index: 4;
 }
 
-#front {
+#front, #front-preview, #back-preview,
+#back-preview-background, #front-background,
+#front-preview-background, #front-border {
     position: absolute;
-    
 }
 
-#front-background {
-    position: absolute;
-    
-}
 
 #back {
     display: none;
@@ -222,6 +221,9 @@ input[type=file] {
 
 /* Right side/Files-holder styling */
 
+.right-side-Btn {
+    max-width: 172px;
+}
 #files-holder {
     border: #040913 solid 1px;
     width: 350px;
@@ -280,4 +282,16 @@ input[type=file] {
     border-right: solid black 1px;
     height: 70px;
     width: 80px;
+}
+#closeBtn{
+    margin-left: 10px;
+}
+#preview-window {
+    background-color: white;
+    margin-top: 100px;
+    width: 60%;
+    height: 80%;
+    display: none;
+    position: fixed;
+    
 }
