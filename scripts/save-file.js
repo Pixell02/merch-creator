@@ -1,6 +1,6 @@
 const saveBtn = document.getElementById("saveBtn");
     saveBtn.addEventListener('click', function () {
-        domtoimage.toBlob(document.getElementById('left-side'))
+        domtoimage.toBlob(document.getElementById('workspace'))
             .then(function (blob) {
                 window.saveAs(blob, 'my-node.png');
             });
